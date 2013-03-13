@@ -1,7 +1,9 @@
-{ nixpkgs ? <nixpkgs> }:
+{ nixpkgs ? <nixpkgs>
+, system ? builtins.currentSystem
+}:
 
 let
-  pkgs = import nixpkgs {};
+  pkgs = import nixpkgs { inherit system; };
 in
 rec {
   myfirstapp = import ./myfirstapp {
