@@ -18,11 +18,11 @@ rec {
   
   emulate_myfirstapp_debug = import ./emulate-myfirstapp {
     inherit (pkgs) androidenv;
-    inherit myfirstapp_debug;
+    myfirstapp = myfirstapp_debug;
   };
   
   emulate_myfirstapp_release = import ./emulate-myfirstapp {
     inherit (pkgs) androidenv;
-    inherit myfirstapp_release;
+    myfirstapp = myfirstapp_release;
   };
 }
