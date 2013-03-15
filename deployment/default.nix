@@ -6,12 +6,23 @@ let
   pkgs = import nixpkgs { inherit system; };
 in
 rec {
-  myfirstapp = import ./myfirstapp {
+  myfirstapp_debug = import ./myfirstapp {
     inherit (pkgs) androidenv;
+    release = false;
   };
   
-  emulate_myfirstapp = import ./emulate-myfirstapp {
+  myfirstapp_release = import ./myfirstapp {
     inherit (pkgs) androidenv;
-    inherit myfirstapp;
+    release = true;
+  };
+  
+  emulate_myfirstapp_debug = import ./emulate-myfirstapp {
+    inherit (pkgs) androidenv;
+    inherit myfirstapp_debug;
+  };
+  
+  emulate_myfirstapp_release = import ./emulate-myfirstapp {
+    inherit (pkgs) androidenv;
+    inherit myfirstapp_release;
   };
 }

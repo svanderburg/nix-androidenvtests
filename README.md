@@ -23,17 +23,25 @@ In order to run the examples, you must have the Nix package manager installed
 and a copy of [Nixpkgs](http://nixos.org/nixpkgs). Consult the Nix manual for
 more details on this.
 
-Then the APK can be built by entering the `deployment/` directory and by
-running:
+Then the debug version of the APK can be built by entering the `deployment/`
+directory and by running:
 
-    $ nix-build -A myfirstapp
+    $ nix-build -A myfirstapp_debug
 
-The above command downloads all required dependencies, including the Android SDK
+We can also build a release version of the APK that is signed with a key.
+This repository contains a pre-generated keystore to accomplish that goal.
+
+    $ nix-build -A myfirstapp_release
+
+If it is desired to replace the pre generated keystore, you can adapt and run the
+`generatekeystore.sh` script stored in the `deployment/myfirstapp` folder.
+
+The above commands downloads all required dependencies, including the Android SDK
 and the required optional features, and produces the resulting APK in `result/`
 
 We can also automatically start an emulator instance running the app:
 
-    $ nix-build -A emulate_myfirstapp
+    $ nix-build -A emulate_myfirstapp_debug
     $ ./result/run-test-emulator
 
 The above instructions produce a shell script taking care of the starting
