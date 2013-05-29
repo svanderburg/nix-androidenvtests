@@ -1,7 +1,7 @@
 {androidenv, release ? false}:
 
 androidenv.buildApp {
-  name = "MyFirstApp";
+  name = "MyFirstApp-${if release then "release" else "debug"}";
   src = ../../src/myfirstapp;
   platformVersions = [ "16" ];
   useGoogleAPIs = true;

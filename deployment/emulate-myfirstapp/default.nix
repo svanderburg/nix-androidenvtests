@@ -1,7 +1,7 @@
 {androidenv, myfirstapp}:
 
 androidenv.emulateApp {
-  name = "MyFirstApp";
+  name = "emulate-${myfirstapp.name}";
   app = myfirstapp;
   platformVersion = "16";
   useGoogleAPIs = true;
