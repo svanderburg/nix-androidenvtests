@@ -1,12 +1,12 @@
-{androidenv, release ? false}:
+{androidenv, release ? false, platformVersion}:
 
 androidenv.buildApp {
   name = "MyFirstApp-${if release then "release" else "debug"}";
   src = ../../src/myfirstapp;
-  platformVersions = [ "16" ];
-  useGoogleAPIs = true;
   
-  release = release;
+  antFlags = "-Dtarget=android-${platformVersion}";
+  platformVersions = [ platformVersion ];
+  inherit release;
   keyStore = ./keystore;
   keyAlias = "myfirstapp";
   keyStorePassword = "mykeystore";
