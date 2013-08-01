@@ -7,6 +7,11 @@
 
 let
   pkgs = import nixpkgs { inherit system; };
+  
+  # Allow strings as parameters by converting them to lists
+  _buildPlatformVersions = if builtins.isList buildPlatformVersions then buildPlatformVersions else [ buildPlatformVersions ];
+  _emulatePlatformVersions = if builtins.isList emulatePlatformVersions then emulatePlatformVersions else [ emulatePlatformVersions ];
+  _abiVersions = if builtins.isList abiVersions then abiVersions else [ abiVersions ];
 in
 rec {
   myfirstapp_debug = builtins.listToAttrs (map (buildPlatformVersion:
@@ -17,7 +22,7 @@ rec {
         release = false;
       };
     }
-  ) buildPlatformVersions);
+  ) _buildPlatformVersions);
   
   myfirstapp_release = builtins.listToAttrs (map (buildPlatformVersion:
     { name = "build_" + buildPlatformVersion;
@@ -27,7 +32,7 @@ rec {
         release = true;
       };
     }
-  ) buildPlatformVersions);
+  ) _buildPlatformVersions);
   
   emulate_myfirstapp_debug = builtins.listToAttrs (map (buildPlatformVersion:
     { name = "build_" + buildPlatformVersion;
@@ -44,11 +49,11 @@ rec {
                 myfirstapp = builtins.getAttr "build_${buildPlatformVersion}" myfirstapp_debug;
               };
             }
-          ) abiVersions);
+          ) _abiVersions);
         }
-      ) emulatePlatformVersions);
+      ) _emulatePlatformVersions);
     }
-  ) buildPlatformVersions);
+  ) _buildPlatformVersions);
   
   emulate_myfirstapp_release = builtins.listToAttrs (map (buildPlatformVersion:
     { name = "build_" + buildPlatformVersion;
@@ -65,9 +70,9 @@ rec {
                 myfirstapp = builtins.getAttr "build_${buildPlatformVersion}" myfirstapp_release;
               };
             }
-          ) abiVersions);
+          ) _abiVersions);
         }
-      ) emulatePlatformVersions);
+      ) _emulatePlatformVersions);
     }
-  ) buildPlatformVersions);
+  ) _buildPlatformVersions);
 }
