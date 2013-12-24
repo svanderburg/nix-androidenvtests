@@ -9,7 +9,7 @@ instances.
 This package includes the example application described in the Android tutorial:
 [http://developer.android.com/training/basics/firstapp/index.html](http://developer.android.com/training/basics/firstapp/index.html)
 
-According to the content license of the tutorial the example source code is
+According to the content license of the tutorial, the example source code is
 Apache 2.0 licensed:
 
     "The documentation content on this site is made available to you as part of
@@ -38,15 +38,15 @@ is most commonly used by Android devices, such as my phone.
 
 Building the example App
 ------------------------
-For example, to build a debug version of the test app APK for API-level 16, we
-can run:
+For example, to build a debug version of the test app APK for API-level 16 on
+a `x86_64-linux` host system, we can run:
 
-    $ nix-build -A myfirstapp_debug.build_16
+    $ nix-build -A myfirstapp_debug.host_x86_64-linux.build_16
 
 We can also build a release version of the same APK that is signed with a key.
 This repository contains a pre-generated keystore to accomplish that goal:
 
-    $ nix-build -A myfirstapp_release.build_16
+    $ nix-build -A myfirstapp_release.host_x86_64-linux.build_16
 
 If it is desired to replace the pre generated keystore, you can adapt and run the
 `generatekeystore.sh` script stored in the `deployment/myfirstapp` folder.
@@ -57,11 +57,11 @@ and the required optional features, and produces the resulting APK in `result/`
 Emulating the example App
 -------------------------
 We can also automatically generate a script starting an emulator instance
-running the app. The following instruction builds an App for Android API-level 16,
-generates a script launching an emulator with a Android API-level 16 system-image
-that uses the `armeabi-v7a` ABI:
+running the app. The following instruction builds an App for Android API-level 16
+on a `x86_64-linux` host system, generates a script launching an emulator with a
+Android API-level 16 system-image that uses the `armeabi-v7a` ABI:
 
-    $ nix-build -A emulate_myfirstapp_debug.build_16.emulate_16.armeabi-v7a
+    $ nix-build -A emulate_myfirstapp_debug.host_x86_64-linux.build_16.emulate_16.armeabi-v7a
     $ ./result/run-test-emulator
 
 The generated shell script takes care of performing all steps of the starting
@@ -87,7 +87,7 @@ For example, by running the following command-line instruction:
     $ nix-build --arg buildPlatformVersions '[ "16" "17" ]' \
       --arg emulatePlatformVersions '[ "16 " 17" ]' \
       --arg abiVersions '[ "armeabi-v7a" "x86" ]' \
-      -A emulate_myfirstapp_release.build_16.emulate_17.x86
+      -A emulate_myfirstapp_release.host_x86_64-linux.build_16.emulate_17.x86
 
 The cartesian product of build and emulator instances is created taking the three
 dimensions into account. This allows us to (for example) build the App against
