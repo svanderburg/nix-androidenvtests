@@ -5,9 +5,6 @@
 , abiVersions ? [ "armeabi-v7a" ]
 }:
 
-let
-  pkgs = import nixpkgs {};
-in
 rec {
   myfirstapp_debug = builtins.listToAttrs (map (system:
     let
