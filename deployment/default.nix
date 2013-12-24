@@ -60,7 +60,7 @@ rec {
                     inherit (pkgs) androidenv;
                     inherit abiVersion;
                     platformVersion = emulatePlatformVersion;
-                    myfirstapp = builtins.getAttr "build_${buildPlatformVersion}" myfirstapp_debug;
+                    myfirstapp = builtins.getAttr system (builtins.getAttr "build_${buildPlatformVersion}" myfirstapp_debug);
                   };
                 }
               ) abiVersions);
@@ -88,7 +88,7 @@ rec {
                     inherit (pkgs) androidenv;
                     inherit abiVersion;
                     platformVersion = emulatePlatformVersion;
-                    myfirstapp = builtins.getAttr "build_${buildPlatformVersion}" myfirstapp_release;
+                    myfirstapp = builtins.getAttr system (builtins.getAttr "build_${buildPlatformVersion}" myfirstapp_release);
                   };
                 }
               ) abiVersions);
