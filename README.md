@@ -85,7 +85,7 @@ values.
 For example, by running the following command-line instruction:
 
     $ nix-build --arg buildPlatformVersions '[ "16" "17" ]' \
-      --arg emulatePlatformVersions '[ "16 " 17" ]' \
+      --arg emulatePlatformVersions '[ "16" "17" ]' \
       --arg abiVersions '[ "armeabi-v7a" "x86" ]' \
       -A emulate_myfirstapp_release.host_x86_64-linux.build_16.emulate_17.x86
 
