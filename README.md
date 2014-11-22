@@ -62,7 +62,7 @@ on a `x86_64-linux` host system, generates a script launching an emulator with a
 Android API-level 16 system-image that uses the `armeabi-v7a` ABI:
 
     $ nix-build -A emulate_myfirstapp_debug.host_x86_64-linux.build_16.emulate_16.armeabi-v7a
-    $ ./result/run-test-emulator
+    $ ./result/bin/run-test-emulator
 
 The generated shell script takes care of performing all steps of the starting
 process. The result is an emulator instance in which the tutorial app is
