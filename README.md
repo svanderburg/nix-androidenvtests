@@ -1,103 +1,206 @@
-Nix Android tests
-=================
-This package includes a number of testcases for the `androidenv.buildApp {}`
-function that can be used with the [Nix package manager](http://nixos.org/nix),
-capable of producing Android APKs from Android source code projects and
-`androidenv.emulateApp {}` capable of generating scripts spawning emulator
-instances.
+Android build environment for Nix
+=================================
+This repository contains facilities to deploy the Android SDK and its plugins,
+build Android projects and spawn emulator instances, by using the
+[Nix package manager](http://nixos.org/nix).
 
-This package includes the example application described in the Android tutorial:
-[http://developer.android.com/training/basics/firstapp/index.html](http://developer.android.com/training/basics/firstapp/index.html)
+You probably do not want to use the stuff in this repository directly -- the
+functionality provided by this package also exists in the upstream version of
+[Nixpkgs](http://nixos.org/nixpkgs).
 
-According to the content license of the tutorial, the example source code is
-Apache 2.0 licensed:
-
-    "The documentation content on this site is made available to you as part of
-    the Android Open Source Project. This documentation, including any code shown
-    in it, is licensed under the Apache 2.0 license, the preferred license for
-    all parts of the of the Android Open Source Project."
-
-The remaining content of this package is covered by the MIT license.
-
-Prerequisites
-=============
-In order to run the examples, you must have the [Nix package manager](http://nixos.org/nix)
-installed and a copy of [Nixpkgs](http://nixos.org/nixpkgs). Consult the Nix
-manual for more details on this.
+This repository is a standalone version for experimentation/testing purposes.
+All changes in this repository are supposed to (eventually) land in the upstream
+Nixpkgs set.
 
 Usage
 =====
-The `default.nix` expression inside the `deployment/` folder contains the
-composition expression for the example app. This expression can be used to build
-an App for a specific Android revision and to generate scripts spawning emulator
-instances.
+This Android build environment provides three major features and a number of
+supporting features.
 
-By default it is configured to only build and emulate for Android API-level 16
-(which corresponds to the Android 4.1 platform) using the `armeabi-v7a` ABI which
-is most commonly used by Android devices, such as my phone.
+Deploying an Android SDK installation with plugins
+--------------------------------------------------
+The first use case is deploying the SDK with a desired set of plugins.
 
-Building the example App
-------------------------
-For example, to build a debug version of the test app APK for API-level 16 on
-a `x86_64-linux` host system, we can run:
+```nix
+{androidenv}:
 
-    $ nix-build -A myfirstapp_debug.host_x86_64-linux.build_16
+androidenv.androidsdk {
+  toolsVersion = "25.2.5";
+  platformToolsVersion = "27.0.1";
+  buildToolsVersions = [ "27.0.3" ];
+  includeEmulator = false;
+  emulatorVersion = "27.2.0";
+  platformVersions = [ "24" ];
+  includeSources = false;
+  includeDocs = false;
+  includeSystemImages = false;
+  systemImageTypes = [ "default" ];
+  abiVersions = [ "armeabi-v7a" ];
+  lldbVersions = [ "2.0.2558144" ];
+  cmakeVersions = [ "3.6.4111459" ];
+  includeNDK = false;
+  ndkVersion = "16.1.4479499";
+  useGoogleAPIs = false;
+  useGoogleAddOns = false;
+  includeExtras = [
+    "extras;google;gcm"
+  ];
+}
+```
 
-We can also build a release version of the same APK that is signed with a key.
-This repository contains a pre-generated keystore to accomplish that goal:
+The above function invocation states that we want an Android SDK with the above
+specified plugin versions. By default, most plugins are disabled. Notable
+exceptions are the tools, platform-tools and build-tools sub packages.
 
-    $ nix-build -A myfirstapp_release.host_x86_64-linux.build_16
+The following parameters are supported:
+* `toolsVersion`, specifies the version of the tools package to use (defaults
+  to: `26.0.1`)
+* `platformsToolsVersion` specifies the version of the `platform-tools` plugin,
+  which defaults to: `27.0.1`.
+* `buildToolsVersion` specifies the versions of the `build-tools` plugins to
+  use. By default, it includes: `27.0.3`.
+* `includeEmulator` specifies whether to deploy the emulator package (`false`
+  by default). When enabled, the version of the emulator to deploy can be
+  specified by setting the `emulatorVersion` parameter.
+* `includeDocs` specifies whether the documentation catalog should be included.
+* `lldbVersions` specifies what LLDB versions should be deployed.
+* `cmakeVersions` specifies which CMake versions should be deployed.
+* `includeNDK` specifies that the Android NDK bundle should be included.
+  Defaults to: `false`.
+* `ndkVersion` specifies the NDK version that we want to use.
+* `includeExtras` is an array of identifier strings referring to arbitrary
+  add-on packages that should be installed.
+* `platformVersions` specifies which platform SDK versions should be included.
 
-If it is desired to replace the pre generated keystore, you can adapt and run the
-`generatekeystore.sh` script stored in the `deployment/myfirstapp` folder.
+For each platform version that has been specified, we can apply the following
+options:
+* `includeSystemImages` specifies whether a system image for each platform SDK
+  should be included.
+* `includeSources` specifies whether the sources for each SDK version should be
+  included.
+* `useGoogleAPIs` specifies that for each selected platform version the
+  Google API should be included.
+* `useGoogleTVAddOns` specifies that for each selected platform version the
+  Google TV add-on should be included.
 
-The above commands downloads all required dependencies including the Android SDK
-and the required optional features, and produces the resulting APK in `result/`
+For each requested system image we can specify the following options:
+* `systemImageTypes` specifies what kind of system images should be included.
+  Defaults to: `default`.
+* `abiVersions` specifies what kind of ABI version of each system image should
+  be included. Defaults to: `armeabi-v7a`.
 
-Emulating the example App
--------------------------
-We can also automatically generate a script starting an emulator instance
-running the app. The following instruction builds an App for Android API-level 16
-on a `x86_64-linux` host system, generates a script launching an emulator with a
-Android API-level 16 system-image that uses the `armeabi-v7a` ABI:
+When building the above expression with:
 
-    $ nix-build -A emulate_myfirstapp_debug.host_x86_64-linux.build_16.emulate_16.armeabi-v7a
-    $ ./result/bin/run-test-emulator
+```bash
+$ nix-build
+```
 
-The generated shell script takes care of performing all steps of the starting
-process. The result is an emulator instance in which the tutorial app is
-automatically started.
+The Android SDK gets deployed with all desired plugin versions.
 
-Configuring the compositions
-----------------------------
-To support more API-levels and ABIs, the parameters of the composition function
-must be altered.
+Building an Android application
+-------------------------------
+In addition to the SDK, it is also possible to build an Ant-based Android
+project and automatically deploy all the Android plugins that a project
+requires.
 
-The `buildPlatformVersions` parameter is a list of strings which specifies
-against which platform API-levels the App has to be built. The
-`emulatePlatformVersions` is used to specify for which API-level system images we
-want to create emulator instances. The `abiVersions` parameter is used to specify
-for which ABIs we want create emulator instances.
+```nix
+{androidenv}:
 
-The composition expression automatically generates cartesian products for these
-values.
+androidenv.buildApp {
+  name = "MyAndroidApp";
+  src = ./myappsources;
+  release = true;
 
-For example, by running the following command-line instruction:
+  # If release is set to true, you need to specify the following parameters
+  keyStore = ./keystore;
+  keyAlias = "myfirstapp";
+  keyStorePassword = "mykeystore";
+  keyAliasPassword = "myfirstapp";
 
-    $ nix-build --arg buildPlatformVersions '[ "16" "17" ]' \
-      --arg emulatePlatformVersions '[ "16" "17" ]' \
-      --arg abiVersions '[ "armeabi-v7a" "x86" ]' \
-      -A emulate_myfirstapp_release.host_x86_64-linux.build_16.emulate_17.x86
+  # Any Android SDK parameters that install all the relevant plugins that a
+  # build requires
+  platformVersions = [ "24" ];
+}
+```
 
-The cartesian product of build and emulator instances is created taking the three
-dimensions into account. This allows us to (for example) build the App against
-the API-level 16 platform API, emulate on an API-level 17 system image using the
-`x86` ABI, which emulates much more efficiently on `x86` machines, because
-hardware virtualisation features (such as [KVM](http://www.linux-kvm.org)) can
-be used.
+Aside from the app-specific build parameters (`name`, `src`, `release` and
+keystore parameters), the `buildApp {}` function supports all the function
+parameters that the SDK composition function (the function shown in the
+previous section) supports.
 
-Apart from specifying these dimensions through the command line, the composition
-expression can also be used together with [Hydra](http://nixos.org/hydra), the
-Nix-based continuous integration server, allowing it to pass these parameters
-through its web interface. Hydra will build all the variants generated by the
-composition expression automatically.
+This build function is particularly useful when it is desired to use
+[Hydra](http://nixos.org/hydra): the Nix-based continuous integration solution
+to build Android apps. An Android APK gets exposed as a build product and can be
+installed on any Android device with a web browser by navigating to the build
+result page.
+
+Spawning emulator instances
+---------------------------
+For testing purposes, it can also be quite convenient to automatically generate
+scripts that spawn emulator instances with all desired configuration settings.
+
+An emulator spawn script can be configured by invoking the `emulateApp {}`
+function:
+
+```nix
+{androidenv}:
+
+androidenv.emulateApp {
+  name = "emulate-MyAndroidApp";
+  platformVersion = "24";
+  abiVersion = "armeabi-v7a"; # mips, x86 or x86_64
+  imageType = "default";
+  useGoogleAPIs = false;
+}
+```
+
+It is also possible to specify an APK to deploy inside the emulator
+and the package and activity names to launch it:
+
+```nix
+{androidenv}:
+
+androidenv.emulateApp {
+  name = "emulate-MyAndroidApp";
+  platformVersion = "24";
+  abiVersion = "armeabi-v7a"; # mips, x86 or x86_64
+  imageType = "default";
+  useGoogleAPIs = false;
+  app = ./MyApp.apk;
+  package = "MyApp";
+  activity = "MainActivity";
+}
+```
+
+In addition to prebuilt APKs, you can also bind the APK parameter to a
+`buildApp {}` function invocation shown in the previous example.
+
+Querying the available versions of each plugin
+----------------------------------------------
+When using any of the previously shown functions, it may be a bit inconvenient
+to find out what options are supported, since the Android SDK provides many
+plugins.
+
+A shell script can be used to retrieve all possible options:
+
+```bash
+sh ./querypackages.sh packages build-tools
+```
+
+The above command-line instruction queries all build-tools versions in the
+generated `packages.nix` expression.
+
+Updating the generated expressions
+----------------------------------
+Most of the Nix expressions are generated from XML files that the Android
+package manager uses. To update the expressions run the `generate.sh` script:
+
+```bash
+sh ./generate.sh
+```
+
+License
+=======
+The contents of this package (except for the Android example project) is
+convered by the same license as Nixpkgs -- the
+[MIT license](https://opensource.org/licenses/MIT).
