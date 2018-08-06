@@ -27,7 +27,7 @@
 {
   addons = {
     <!-- Convert all addons -->
-    <xsl:for-each select="remotePackage[type-details/@xsi:type='addon:addonDetailsType']"><xsl:sort select="@path" />
+    <xsl:for-each select="remotePackage[type-details/@xsi:type='addon:addonDetailsType' and archives/archive/complete/url != 'google_apis-25_r1.zip' ]"><xsl:sort select="@path" />
     "<xsl:value-of select="type-details/api-level" />"."<xsl:value-of select="type-details/tag/id" />" = {
       name = "<xsl:value-of select="type-details/tag/id" />";
       path = "<xsl:value-of select="translate(@path, ';', '/')" />";

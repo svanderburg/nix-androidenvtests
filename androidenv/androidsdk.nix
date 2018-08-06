@@ -1,10 +1,10 @@
 {stdenv, fetchurl, requireFile, makeWrapper, unzip, autopatchelf, pkgs, pkgs_i686}:
 
 { toolsVersion ? "25.2.5"
-, platformToolsVersion ? "27.0.1"
-, buildToolsVersions ? [ "27.0.3" ]
-, includeEmulator ? true
-, emulatorVersion ? "27.2.0"
+, platformToolsVersion ? "28.0.0"
+, buildToolsVersions ? [ "28.0.0" ]
+, includeEmulator ? false
+, emulatorVersion ? "28.0.2"
 , platformVersions ? []
 , includeSources ? false
 , includeDocs ? false
@@ -14,7 +14,7 @@
 , lldbVersions ? [ ]
 , cmakeVersions ? [ ]
 , includeNDK ? false
-, ndkVersion ? "16.1.4479499"
+, ndkVersion ? "17.1.4828580"
 , useGoogleAPIs ? false
 , useGoogleTVAddOns ? false
 , includeExtras ? []
@@ -236,7 +236,7 @@ rec {
           ln -s $i $out/bin
       done
 
-      ln -s $PWD/platform-tools/adb $out/bin      
+      ln -s $PWD/platform-tools/adb $out/bin
     '';
   };
 }

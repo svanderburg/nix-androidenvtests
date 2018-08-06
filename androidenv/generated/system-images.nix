@@ -172,20 +172,6 @@
   };
   
 
-    "15".default."mips" = {
-      name = "system-image-15-default-mips";
-      path = "system-images/android-15/default/mips";
-      revision = "15-default-mips";
-      displayName = "MIPS System Image";
-      archives.all = fetchurl {
-      
-        url = https://dl.google.com/android/repository/sys-img/android/sysimg_mips-15_r01.zip;
-        sha1 = "a753bb4a6783124dad726c500ce9aec9d2c1b2d9";
-      
-      };
-  };
-  
-
     "16".default."mips" = {
       name = "system-image-16-default-mips";
       path = "system-images/android-16/default/mips";
@@ -354,6 +340,20 @@
   };
   
 
+    "28".default."x86" = {
+      name = "system-image-28-default-x86";
+      path = "system-images/android-28/default/x86";
+      revision = "28-default-x86";
+      displayName = "Intel x86 Atom System Image";
+      archives.all = fetchurl {
+      
+        url = https://dl.google.com/android/repository/sys-img/android/x86-28_r04.zip;
+        sha1 = "ce03c42d80c0fc6dc47f6455dbee7aa275d02780";
+      
+      };
+  };
+  
+
     "21".default."x86_64" = {
       name = "system-image-21-default-x86_64";
       path = "system-images/android-21/default/x86_64";
@@ -405,6 +405,20 @@
       
         url = https://dl.google.com/android/repository/sys-img/android/x86_64-24_r08.zip;
         sha1 = "f6559e1949a5879f31a9662f4f0e50ad60181684";
+      
+      };
+  };
+  
+
+    "28".default."x86_64" = {
+      name = "system-image-28-default-x86_64";
+      path = "system-images/android-28/default/x86_64";
+      revision = "28-default-x86_64";
+      displayName = "Intel x86 Atom_64 System Image";
+      archives.all = fetchurl {
+      
+        url = https://dl.google.com/android/repository/sys-img/android/x86_64-28_r04.zip;
+        sha1 = "d47a85c8f4e9fd57df97814ad8884eeb0f3a0ef0";
       
       };
   };
