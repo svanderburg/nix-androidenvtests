@@ -42,7 +42,9 @@ deployAndroidPackage {
     done
 
     wrapProgram $PWD/emulator \
-      --prefix PATH : ${pkgs.file}/bin
+      --prefix PATH : ${pkgs.file}/bin:${pkgs.pciutils}/bin:${pkgs.glxinfo}/bin \
+      --set QT_XKB_CONFIG_ROOT ${pkgs.xkeyboard_config}/share/X11/xkb \
+      --set QTCOMPOSE ${pkgs.xorg.libX11.out}/share/X11/locale
 
     # Patch all script shebangs
     patchShebangs .

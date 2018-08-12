@@ -18,7 +18,7 @@
 , useGoogleAPIs ? false
 , useGoogleTVAddOns ? false
 , includeExtras ? []
-}:
+}@args:
 
 let
   inherit (pkgs) stdenv fetchurl makeWrapper unzip;
@@ -68,7 +68,7 @@ rec {
   };
 
   emulator = import ./emulator.nix {
-    inherit deployAndroidPackage os autopatchelf pkgs pkgs_i686;
+    inherit deployAndroidPackage os autopatchelf makeWrapper pkgs pkgs_i686;
     inherit (stdenv) lib;
     package = packages.emulator."${emulatorVersion}"."${os}";
   };

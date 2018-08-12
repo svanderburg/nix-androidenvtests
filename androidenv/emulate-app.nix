@@ -13,11 +13,11 @@ let
   # Extract the parameters meant for the Android SDK
   androidParams = {
     platformVersions = [ platformVersion ];
-    includeEmulator = true;     
+    includeEmulator = true;
     includeSystemImages = true;
     systemImageTypes = [ imageType ];
-    abiVersions = [ abiVersion ];    
-  };  
+    abiVersions = [ abiVersion ];
+  };
 
   androidsdkComposition = (androidsdk androidParams).androidsdk;
 in

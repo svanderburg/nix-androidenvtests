@@ -2,7 +2,7 @@
 , systems ? [ "x86_64-linux" ]
 , buildPlatformVersions ? [ "16" ]
 , emulatePlatformVersions ? [ "23" ]
-, abiVersions ? [ "armeabi-v7a" ]
+, abiVersions ? [ "x86" ]
 , useUpstream ? false
 }:
 
