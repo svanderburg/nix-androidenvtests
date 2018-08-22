@@ -26,12 +26,36 @@
 
 {
   addons = {
-    <!-- Convert all addons -->
+    <!-- Convert all addons, but skip the entry for google APIs version 25 because it is inconsistent with the spec -->
     <xsl:for-each select="remotePackage[type-details/@xsi:type='addon:addonDetailsType' and archives/archive/complete/url != 'google_apis-25_r1.zip' ]"><xsl:sort select="@path" />
     "<xsl:value-of select="type-details/api-level" />"."<xsl:value-of select="type-details/tag/id" />" = {
       name = "<xsl:value-of select="type-details/tag/id" />";
       path = "<xsl:value-of select="translate(@path, ';', '/')" />";
       revision = "<xsl:value-of select="type-details/api-level" />";
+      displayName = "<xsl:value-of select="display-name" />";
+      archives = {
+      <xsl:for-each select="archives/archive[not(host-os)]">
+        all = fetchurl {
+          url = <xsl:call-template name="repository-url"/>;
+          sha1 = "<xsl:value-of select="complete/checksum" />";
+        };
+      </xsl:for-each>
+      <xsl:for-each select="archives/archive[host-os and not(host-os = 'windows')]">
+        <xsl:value-of select="host-os" /> = fetchurl {
+          url = <xsl:call-template name="repository-url"/>;
+          sha1 = "<xsl:value-of select="complete/checksum" />";
+        };
+      </xsl:for-each>
+      };
+    };
+    </xsl:for-each>
+
+    <!-- Workaround to make google APIs version 25 work. Hopefully, we can get rid of this at some point -->
+    <xsl:for-each select="remotePackage[type-details/@xsi:type='addon:addonDetailsType' and archives/archive/complete/url = 'google_apis-25_r1.zip' ]">
+    "<xsl:value-of select="25" />"."<xsl:value-of select="type-details/tag/id" />" = {
+      name = "<xsl:value-of select="type-details/tag/id" />";
+      path = "add-ons/addon-google_apis-google-25";
+      revision = "<xsl:value-of select="25" />";
       displayName = "<xsl:value-of select="display-name" />";
       archives = {
       <xsl:for-each select="archives/archive[not(host-os)]">

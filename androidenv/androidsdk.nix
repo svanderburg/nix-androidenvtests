@@ -124,8 +124,8 @@ rec {
     deployAndroidPackage {
       inherit os;
       package = addons.addons."${version}".google_apis;
-    }  
-  ) platformVersions;
+    }
+  ) (builtins.filter (platformVersion: platformVersion < "26") platformVersions); # API level 26 and higher include Google APIs by default
 
   google-tv-addons = map (version:
     deployAndroidPackage {

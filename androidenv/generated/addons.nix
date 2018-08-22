@@ -349,6 +349,21 @@
       };
     };
     
+    "25"."google_apis" = {
+      name = "google_apis";
+      path = "add-ons/addon-google_apis-google-25";
+      revision = "25";
+      displayName = "Google APIs";
+      archives = {
+      
+        all = fetchurl {
+          url = https://dl.google.com/android/repository/google_apis-25_r1.zip;
+          sha1 = "550e83eea9513ab11c44919ac6da54b36084a9f3";
+        };
+      
+      };
+    };
+    
   };
 
   extras = {
