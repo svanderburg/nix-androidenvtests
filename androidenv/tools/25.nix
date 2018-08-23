@@ -2,8 +2,8 @@
 
 deployAndroidPackage {
   buildInputs = [ autopatchelf makeWrapper ];
-  libs_x86_64 = lib.optionalString (os == "linux") lib.makeLibraryPath [ pkgs.glibc pkgs.xlibs.libX11 pkgs.xlibs.libXext pkgs.xlibs.libXdamage pkgs.xlibs.libxcb pkgs.xlibs.libXfixes pkgs.xlibs.libXrender pkgs.fontconfig pkgs.freetype pkgs.libGL pkgs.zlib pkgs.ncurses5 pkgs.libpulseaudio ];
-  libs_i386 = lib.optionalString (os == "linux") lib.makeLibraryPath [ pkgs_i686.glibc pkgs_i686.xlibs.libX11 pkgs_i686.xlibs.libXrender pkgs_i686.fontconfig pkgs_i686.freetype pkgs_i686.zlib ];
+  libs_x86_64 = lib.optionalString (os == "linux") (lib.makeLibraryPath [ pkgs.glibc pkgs.xlibs.libX11 pkgs.xlibs.libXext pkgs.xlibs.libXdamage pkgs.xlibs.libxcb pkgs.xlibs.libXfixes pkgs.xlibs.libXrender pkgs.fontconfig pkgs.freetype pkgs.libGL pkgs.zlib pkgs.ncurses5 pkgs.libpulseaudio ]);
+  libs_i386 = lib.optionalString (os == "linux") (lib.makeLibraryPath [ pkgs_i686.glibc pkgs_i686.xlibs.libX11 pkgs_i686.xlibs.libXrender pkgs_i686.fontconfig pkgs_i686.freetype pkgs_i686.zlib ]);
   inherit package os;
 
   patchInstructions = ''
@@ -41,10 +41,12 @@ deployAndroidPackage {
           --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ pkgs.xlibs.libX11 pkgs.xlibs.libXtst ]}
     done
 
-    wrapProgram $PWD/emulator \
-      --prefix PATH : ${pkgs.file}/bin:${pkgs.pciutils}/bin:${pkgs.glxinfo}/bin \
-      --set QT_XKB_CONFIG_ROOT ${pkgs.xkeyboard_config}/share/X11/xkb \
-      --set QTCOMPOSE ${pkgs.xorg.libX11.out}/share/X11/locale
+    ${lib.optionalString (os == "linux") ''
+      wrapProgram $PWD/emulator \
+        --prefix PATH : ${pkgs.file}/bin:${pkgs.glxinfo}/bin:${pkgs.pciutils}/bin \
+        --set QT_XKB_CONFIG_ROOT ${pkgs.xkeyboard_config}/share/X11/xkb \
+        --set QTCOMPOSE ${pkgs.xorg.libX11.out}/share/X11/locale
+    ''}
 
     # Patch all script shebangs
     patchShebangs .

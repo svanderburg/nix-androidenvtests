@@ -3,8 +3,8 @@
 deployAndroidPackage {
   inherit package os;
   buildInputs = [ autopatchelf makeWrapper ];
-  libs_x86_64 = lib.optionalString (os == "linux") lib.makeLibraryPath [ pkgs.glibc pkgs.zlib pkgs.ncurses5 ];
-  libs_i386 = lib.optionalString (os == "linux") lib.makeLibraryPath [ pkgs_i686.glibc pkgs_i686.zlib pkgs_i686.ncurses5 ];
+  libs_x86_64 = lib.optionalString (os == "linux") (lib.makeLibraryPath [ pkgs.glibc pkgs.zlib pkgs.ncurses5 ]);
+  libs_i386 = lib.optionalString (os == "linux") (lib.makeLibraryPath [ pkgs_i686.glibc pkgs_i686.zlib pkgs_i686.ncurses5 ]);
   patchInstructions = ''
     ${lib.optionalString (os == "linux") ''
       export libs_i386=$packageBaseDir/lib:$libs_i386
