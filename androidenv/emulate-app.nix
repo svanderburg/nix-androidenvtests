@@ -71,11 +71,12 @@ stdenv.mkDerivation {
     export ANDROID_SERIAL="emulator-$port"
 
     # Create a virtual android device for testing if it does not exists
+    ${androidsdkComposition}/libexec/android-sdk/tools/android list targets
 
     if [ "$(${androidsdkComposition}/libexec/android-sdk/tools/android list avd | grep 'Name: device')" = "" ]
     then
         # Create a virtual android device
-        yes "" | ${androidsdkComposition}/libexec/android-sdk/tools/android create avd -n device -t ${if useGoogleAPIs then "'Google Inc.:Google APIs:"+platformVersion+"'" else "android-"+platformVersion} $NIX_ANDROID_AVD_FLAGS
+        yes "" | ${androidsdkComposition}/libexec/android-sdk/tools/android create avd -n device -t 1 --abi ${imageType}/${abiVersion} $NIX_ANDROID_AVD_FLAGS
 
         ${stdenv.lib.optionalString enableGPU ''
           # Enable GPU acceleration

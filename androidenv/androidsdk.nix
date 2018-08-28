@@ -4,7 +4,7 @@
 , platformToolsVersion ? "28.0.0"
 , buildToolsVersions ? [ "28.0.0" ]
 , includeEmulator ? false
-, emulatorVersion ? "28.0.2"
+, emulatorVersion ? "28.0.5"
 , platformVersions ? []
 , includeSources ? false
 , includeDocs ? false
@@ -34,9 +34,38 @@ let
   };
 
   # Generated system images
-  system-images-packages = import ./generated/system-images.nix {
+  system-images-packages-android = import ./generated/system-images-android.nix {
     inherit fetchurl;
   };
+
+  system-images-packages-android-tv = import ./generated/system-images-android-tv.nix {
+    inherit fetchurl;
+  };
+
+  system-images-packages-android-wear = import ./generated/system-images-android-wear.nix {
+    inherit fetchurl;
+  };
+
+  system-images-packages-android-wear-cn = import ./generated/system-images-android-wear-cn.nix {
+    inherit fetchurl;
+  };
+
+  system-images-packages-google_apis = import ./generated/system-images-google_apis.nix {
+    inherit fetchurl;
+  };
+
+  system-images-packages-google_apis_playstore = import ./generated/system-images-google_apis_playstore.nix {
+    inherit fetchurl;
+  };
+
+  system-images-packages =
+    stdenv.lib.recursiveUpdate
+      system-images-packages-android
+      (stdenv.lib.recursiveUpdate system-images-packages-android-tv
+        (stdenv.lib.recursiveUpdate system-images-packages-android-wear
+          (stdenv.lib.recursiveUpdate system-images-packages-android-wear-cn
+            (stdenv.lib.recursiveUpdate system-images-packages-google_apis system-images-packages-google_apis_playstore))))
+    ;
 
   # Generated addons
   addons = import ./generated/addons.nix {

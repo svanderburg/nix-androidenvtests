@@ -4,6 +4,8 @@
   xmlns:sys-img="http://schemas.android.com/sdk/android/repo/sys-img2/01"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
+  <xsl:param name="imageType" />
+
   <xsl:output omit-xml-declaration="yes" indent="no" />
 
   <xsl:template name="repository-url">
@@ -13,8 +15,7 @@
         <xsl:value-of select="$raw-url"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:text>https://dl.google.com/android/repository/sys-img/android/</xsl:text>
-        <xsl:value-of select="$raw-url"/>
+        https://dl.google.com/android/repository/sys-img/<xsl:value-of select="$imageType" />/<xsl:value-of select="$raw-url"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
