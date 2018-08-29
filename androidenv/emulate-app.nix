@@ -1,6 +1,6 @@
 { androidsdk, stdenv }:
 { name, app ? null
-, platformVersion ? "16", abiVersion ? "armeabi-v7a", imageType ? "default", useGoogleAPIs ? false
+, platformVersion ? "16", abiVersion ? "armeabi-v7a", systemImageType ? "default", useGoogleAPIs ? false
 , enableGPU ? false, extraAVDFiles ? []
 , package ? null, activity ? null
 , avdHomeDir ? null
@@ -15,7 +15,7 @@ let
     platformVersions = [ platformVersion ];
     includeEmulator = true;
     includeSystemImages = true;
-    systemImageTypes = [ imageType ];
+    systemImageTypes = [ systemImageType ];
     abiVersions = [ abiVersion ];
   };
 

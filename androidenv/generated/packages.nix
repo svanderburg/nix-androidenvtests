@@ -893,41 +893,41 @@
     };
   };
   
-  "emulator"."27.3.9".linux = {
+  "emulator"."27.3.10".linux = {
     
     name = "emulator";
     path = "emulator";
-    revision = "27.3.9";
+    revision = "27.3.10";
     displayName = "Android Emulator";
     archives = {
       linux = fetchurl {
-        url = https://dl.google.com/android/repository/emulator-linux-4958899.zip;
-        sha1 = "722a5e8a86bc08dc8bd2f009feffa10101d3d2ee";
+        url = https://dl.google.com/android/repository/emulator-linux-4969155.zip;
+        sha1 = "5b037b25bc6567fda3071457f0009c057670d9e8";
       };
       
     };
   };
   
-  "emulator"."27.3.9".macosx = {
+  "emulator"."27.3.10".macosx = {
     
     name = "emulator";
     path = "emulator";
-    revision = "27.3.9";
+    revision = "27.3.10";
     displayName = "Android Emulator";
     archives = {
       macosx = fetchurl {
-        url = https://dl.google.com/android/repository/emulator-darwin-4958899.zip;
-        sha1 = "5e9d27e3e95a7a308ba1b305429abde076fb4f7e";
+        url = https://dl.google.com/android/repository/emulator-darwin-4969155.zip;
+        sha1 = "28d2b51ee5c84bc544deee433419f33dc9e05b66";
       };
       
     };
   };
   
-  "emulator"."27.3.9".windows = {
+  "emulator"."27.3.10".windows = {
     
     name = "emulator";
     path = "emulator";
-    revision = "27.3.9";
+    revision = "27.3.10";
     displayName = "Android Emulator";
     archives = {
       

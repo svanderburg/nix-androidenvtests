@@ -53,12 +53,10 @@ specified plugin versions. By default, most plugins are disabled. Notable
 exceptions are the tools, platform-tools and build-tools sub packages.
 
 The following parameters are supported:
-* `toolsVersion`, specifies the version of the tools package to use (defaults
-  to: `26.0.1`)
-* `platformsToolsVersion` specifies the version of the `platform-tools` plugin,
-  which defaults to: `27.0.1`.
+* `toolsVersion`, specifies the version of the tools package to use
+* `platformsToolsVersion` specifies the version of the `platform-tools` plugin
 * `buildToolsVersion` specifies the versions of the `build-tools` plugins to
-  use. By default, it includes: `27.0.3`.
+  use.
 * `includeEmulator` specifies whether to deploy the emulator package (`false`
   by default). When enabled, the version of the emulator to deploy can be
   specified by setting the `emulatorVersion` parameter.
@@ -149,7 +147,7 @@ androidenv.emulateApp {
   name = "emulate-MyAndroidApp";
   platformVersion = "24";
   abiVersion = "armeabi-v7a"; # mips, x86 or x86_64
-  imageType = "default";
+  systemImageType = "default";
   useGoogleAPIs = false;
 }
 ```
@@ -164,7 +162,7 @@ androidenv.emulateApp {
   name = "emulate-MyAndroidApp";
   platformVersion = "24";
   abiVersion = "armeabi-v7a"; # mips, x86 or x86_64
-  imageType = "default";
+  systemImageType = "default";
   useGoogleAPIs = false;
   app = ./MyApp.apk;
   package = "MyApp";
