@@ -143,8 +143,8 @@ rec {
     }
   ) cmakeVersions;
 
-  ndk-bundle = import ./ndk-bundle.nix {
-    inherit deployAndroidPackage os autopatchelf pkgs;
+  ndk-bundle = import ./ndk-bundle {
+    inherit deployAndroidPackage os autopatchelf makeWrapper pkgs platform-tools;
     inherit (stdenv) lib;
     package = packages.ndk-bundle."${ndkVersion}";
   };
