@@ -1,4 +1,4 @@
-{ androidsdk, stdenv, ant, jdk }:
+{ composeAndroidPackages, stdenv, ant, jdk }:
 
 { name
 , release ? false, keyStore ? null, keyAlias ? null, keyStorePassword ? null, keyAliasPassword ? null
@@ -9,13 +9,13 @@
 assert release -> keyStore != null && keyAlias != null && keyStorePassword != null && keyAliasPassword != null;
 
 let
-  androidSdkArgNames = builtins.attrNames (builtins.functionArgs androidsdk);
+  androidSdkArgNames = builtins.attrNames (builtins.functionArgs composeAndroidPackages);
   extraParams = removeAttrs args ([ "name" ] ++ androidSdkArgNames);
 
   # Extract the parameters meant for the Android SDK
-  androidParams = builtins.intersectAttrs (builtins.functionArgs androidsdk) args;
+  androidParams = builtins.intersectAttrs (builtins.functionArgs composeAndroidPackages) args;
 
-  androidsdkComposition = (androidsdk androidParams).androidsdk;
+  androidsdkComposition = (composeAndroidPackages androidParams).androidsdk;
 in
 stdenv.mkDerivation ({
   name = stdenv.lib.replaceChars [" "] [""] name; # Android APKs cannot contain white spaces in their names

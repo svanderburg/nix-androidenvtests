@@ -1,4 +1,4 @@
-{ androidsdk, stdenv }:
+{ composeAndroidPackages, stdenv }:
 { name, app ? null
 , platformVersion ? "16", abiVersion ? "armeabi-v7a", systemImageType ? "default", useGoogleAPIs ? false
 , enableGPU ? false, extraAVDFiles ? []
@@ -7,7 +7,7 @@
 }@args:
 
 let
-  androidSdkArgNames = builtins.attrNames (builtins.functionArgs androidsdk);
+  androidSdkArgNames = builtins.attrNames (builtins.functionArgs composeAndroidPackages);
   extraParams = removeAttrs args ([ "name" ] ++ androidSdkArgNames);
 
   # Extract the parameters meant for the Android SDK
@@ -19,7 +19,7 @@ let
     abiVersions = [ abiVersion ];
   };
 
-  androidsdkComposition = (androidsdk androidParams).androidsdk;
+  androidsdkComposition = (composeAndroidPackages androidParams).androidsdk;
 in
 stdenv.mkDerivation {
   inherit name;
@@ -76,7 +76,7 @@ stdenv.mkDerivation {
     if [ "$(${androidsdkComposition}/libexec/android-sdk/tools/android list avd | grep 'Name: device')" = "" ]
     then
         # Create a virtual android device
-        yes "" | ${androidsdkComposition}/libexec/android-sdk/tools/android create avd -n device -t 1 --abi ${imageType}/${abiVersion} $NIX_ANDROID_AVD_FLAGS
+        yes "" | ${androidsdkComposition}/libexec/android-sdk/tools/android create avd -n device -t 1 --abi ${systemImageType}/${abiVersion} $NIX_ANDROID_AVD_FLAGS
 
         ${stdenv.lib.optionalString enableGPU ''
           # Enable GPU acceleration
