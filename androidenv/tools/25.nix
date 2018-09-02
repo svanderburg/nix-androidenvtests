@@ -1,6 +1,7 @@
 {deployAndroidPackage, lib, package, autopatchelf, makeWrapper, os, pkgs, pkgs_i686, postInstall ? ""}:
 
 deployAndroidPackage {
+  name = "androidsdk";
   buildInputs = [ autopatchelf makeWrapper ];
   libs_x86_64 = lib.optionalString (os == "linux") (lib.makeLibraryPath [ pkgs.glibc pkgs.xlibs.libX11 pkgs.xlibs.libXext pkgs.xlibs.libXdamage pkgs.xlibs.libxcb pkgs.xlibs.libXfixes pkgs.xlibs.libXrender pkgs.fontconfig pkgs.freetype pkgs.libGL pkgs.zlib pkgs.ncurses5 pkgs.libpulseaudio ]);
   libs_i386 = lib.optionalString (os == "linux") (lib.makeLibraryPath [ pkgs_i686.glibc pkgs_i686.xlibs.libX11 pkgs_i686.xlibs.libXrender pkgs_i686.fontconfig pkgs_i686.freetype pkgs_i686.zlib ]);

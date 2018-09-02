@@ -1,6 +1,7 @@
 {deployAndroidPackage, requireFile, lib, autopatchelf, makeWrapper, os, pkgs, pkgs_i686, postInstall ? ""}:
 
 deployAndroidPackage {
+  name = "androidsdk";
   inherit os;
   buildInputs = [ autopatchelf makeWrapper ];
 
