@@ -10,7 +10,7 @@ functionality provided by this package also exists in the upstream version of
 
 This repository is a standalone version for experimentation/testing purposes.
 All changes in this repository are supposed to (eventually) land in the upstream
-Nixpkgs set.
+Nixpkgs repository.
 
 Usage
 =====
@@ -19,33 +19,37 @@ supporting features.
 
 Deploying an Android SDK installation with plugins
 --------------------------------------------------
-The first use case is deploying the SDK with a desired set of plugins.
+The first use case is deploying the SDK with a desired set of plugins or subsets
+of an SDK.
 
 ```nix
 {androidenv}:
 
-androidenv.androidsdk {
-  toolsVersion = "25.2.5";
-  platformToolsVersion = "27.0.1";
-  buildToolsVersions = [ "27.0.3" ];
-  includeEmulator = false;
-  emulatorVersion = "27.2.0";
-  platformVersions = [ "24" ];
-  includeSources = false;
-  includeDocs = false;
-  includeSystemImages = false;
-  systemImageTypes = [ "default" ];
-  abiVersions = [ "armeabi-v7a" ];
-  lldbVersions = [ "2.0.2558144" ];
-  cmakeVersions = [ "3.6.4111459" ];
-  includeNDK = false;
-  ndkVersion = "16.1.4479499";
-  useGoogleAPIs = false;
-  useGoogleAddOns = false;
-  includeExtras = [
-    "extras;google;gcm"
-  ];
-}
+let
+  androidComposition = androidenv.composeAndroidPackages {
+    toolsVersion = "25.2.5";
+    platformToolsVersion = "27.0.1";
+    buildToolsVersions = [ "27.0.3" ];
+    includeEmulator = false;
+    emulatorVersion = "27.2.0";
+    platformVersions = [ "24" ];
+    includeSources = false;
+    includeDocs = false;
+    includeSystemImages = false;
+    systemImageTypes = [ "default" ];
+    abiVersions = [ "armeabi-v7a" ];
+    lldbVersions = [ "2.0.2558144" ];
+    cmakeVersions = [ "3.6.4111459" ];
+    includeNDK = false;
+    ndkVersion = "16.1.4479499";
+    useGoogleAPIs = false;
+    useGoogleAddOns = false;
+    includeExtras = [
+      "extras;google;gcm"
+    ];
+  };
+in
+androidComposition.androidsdk
 ```
 
 The above function invocation states that we want an Android SDK with the above
@@ -87,6 +91,8 @@ For each requested system image we can specify the following options:
 * `abiVersions` specifies what kind of ABI version of each system image should
   be included. Defaults to: `armeabi-v7a`.
 
+Most of the function arguments have reasonable default settings.
+
 When building the above expression with:
 
 ```bash
@@ -94,6 +100,20 @@ $ nix-build
 ```
 
 The Android SDK gets deployed with all desired plugin versions.
+
+We can also deploy subsets of the Android SDK. For example, to only the the
+`platform-tools` package, you can evaluate the following expression:
+
+```nix
+{androidenv}:
+
+let
+  androidComposition = androidenv.composeAndroidPackages {
+    ...
+  };
+in
+androidComposition.platform-tools
+```
 
 Building an Android application
 -------------------------------
