@@ -265,7 +265,10 @@ rec {
           ln -s $i $out/bin
       done
 
-      ln -s $PWD/platform-tools/adb $out/bin
+      for i in ${platform-tools}/bin/*
+      do
+          ln -s $i $out/bin
+      done
     '';
   };
 }
