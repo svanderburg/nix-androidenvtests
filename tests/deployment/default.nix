@@ -6,13 +6,17 @@
 , useUpstream ? false
 }:
 
+let
+  getAndroidEnv = pkgs:
+    if useUpstream then pkgs.androidenv else import ../../androidenv {
+      inherit pkgs;
+    };
+in
 rec {
   myfirstapp_debug = builtins.listToAttrs (map (system:
     let
       pkgs = import nixpkgs { inherit system; };
-      androidenv = if useUpstream then pkgs.androidenv else import ../../androidenv {
-        inherit pkgs;
-      };
+      androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
       value = builtins.listToAttrs (map (buildPlatformVersion:
@@ -26,13 +30,11 @@ rec {
       ) buildPlatformVersions);
     }
   ) systems);
-  
+
   myfirstapp_release = builtins.listToAttrs (map (system:
     let
       pkgs = import nixpkgs { inherit system; };
-      androidenv = if useUpstream then pkgs.androidenv else import ../../androidenv {
-        inherit pkgs;
-      };
+      androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
       value = builtins.listToAttrs (map (buildPlatformVersion:
@@ -46,22 +48,20 @@ rec {
       ) buildPlatformVersions);
     }
   ) systems);
-  
+
   emulate_myfirstapp_debug = builtins.listToAttrs (map (system:
     let
       pkgs = import nixpkgs { inherit system; };
-      androidenv = if useUpstream then pkgs.androidenv else import ../../androidenv {
-        inherit pkgs;
-      };
+      androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
       value = builtins.listToAttrs (map (buildPlatformVersion:
         { name = "build_" + buildPlatformVersion;
           value = builtins.listToAttrs (map (emulatePlatformVersion:
-      
+
             { name = "emulate_" + emulatePlatformVersion;
               value = builtins.listToAttrs (map (abiVersion:
-        
+
                 { name = abiVersion;
                   value = import ./emulate-myfirstapp {
                     inherit androidenv abiVersion;
@@ -76,22 +76,20 @@ rec {
       ) buildPlatformVersions);
     }
   ) systems);
-  
+
   emulate_myfirstapp_release = builtins.listToAttrs (map (system:
     let
       pkgs = import nixpkgs { inherit system; };
-      androidenv = if useUpstream then pkgs.androidenv else import ../../androidenv {
-        inherit pkgs;
-      };
+      androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
       value = builtins.listToAttrs (map (buildPlatformVersion:
         { name = "build_" + buildPlatformVersion;
           value = builtins.listToAttrs (map (emulatePlatformVersion:
-      
+
             { name = "emulate_" + emulatePlatformVersion;
               value = builtins.listToAttrs (map (abiVersion:
-        
+
                 { name = abiVersion;
                   value = import ./emulate-myfirstapp {
                     inherit abiVersion androidenv;
