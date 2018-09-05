@@ -18,7 +18,7 @@
 , useGoogleAPIs ? false
 , useGoogleTVAddOns ? false
 , includeExtras ? []
-}@args:
+}:
 
 let
   inherit (pkgs) stdenv fetchurl makeWrapper unzip;
@@ -64,8 +64,7 @@ let
       (stdenv.lib.recursiveUpdate system-images-packages-android-tv
         (stdenv.lib.recursiveUpdate system-images-packages-android-wear
           (stdenv.lib.recursiveUpdate system-images-packages-android-wear-cn
-            (stdenv.lib.recursiveUpdate system-images-packages-google_apis system-images-packages-google_apis_playstore))))
-    ;
+            (stdenv.lib.recursiveUpdate system-images-packages-google_apis system-images-packages-google_apis_playstore))));
 
   # Generated addons
   addons = import ./generated/addons.nix {
@@ -161,7 +160,31 @@ rec {
       inherit os;
       package = addons.addons."${version}".google_tv_addon;
     }
-  ) platformVersions; 
+  ) platformVersions;
+
+  # Function that automatically links all plugins for which multiple versions can coexist
+  linkPlugins = {name, plugins}:
+    stdenv.lib.optionalString (plugins != []) ''
+      mkdir -p ${name}
+      ${stdenv.lib.concatMapStrings (plugin: ''
+        ln -s ${plugin}/libexec/android-sdk/${name}/* ${name}
+      '') plugins}
+    '';
+
+  # Function that automatically links a plugin for which only one version exists
+  linkPlugin = {name, plugin, check ? true}:
+    stdenv.lib.optionalString check ''
+      ln -s ${plugin}/libexec/android-sdk/* ${name}
+    '';
+
+  # Links all plugins related to a requested platform
+  linkPlatformPlugins = {name, plugins, check}:
+    stdenv.lib.optionalString check ''
+      mkdir -p ${name}
+      ${stdenv.lib.concatMapStrings (plugin: ''
+        ln -s ${plugin}/libexec/android-sdk/${name}/* ${name}
+      '') plugins}
+    ''; # */
 
   # This derivation deploys the tools package and symlinks all the desired
   # plugins that we want to use.
@@ -173,51 +196,16 @@ rec {
     postInstall = ''
       # Symlink all requested plugins
 
-      ln -s ${platform-tools}/libexec/android-sdk/* platform-tools
+      ${linkPlugin { name = "platform-tools"; plugin = platform-tools; }}
+      ${linkPlugins { name = "build-tools"; plugins = build-tools; }}
+      ${linkPlugin { name = "emulator"; plugin = emulator; check = includeEmulator; }}
+      ${linkPlugin { name = "docs"; plugin = docs; check = includeDocs; }}
+      ${linkPlugins { name = "platforms"; plugins = platforms; }}
+      ${linkPlatformPlugins { name = "sources"; plugins = sources; check = includeSources; }}
+      ${linkPlugins { name = "lldb"; plugins = lldb; }}
+      ${linkPlugins { name = "cmake"; plugins = cmake; }}
+      ${linkPlugin { name = "ndk-bundle"; plugin = ndk-bundle; check = includeNDK; }}
 
-      ${stdenv.lib.optionalString (build-tools != []) ''
-        mkdir -p build-tools
-        ${stdenv.lib.concatMapStrings (buildTool: ''
-          ln -s ${buildTool}/libexec/android-sdk/build-tools/* build-tools
-        '') build-tools}
-      ''}
-
-      ${stdenv.lib.optionalString includeEmulator ''
-        ln -s ${emulator}/libexec/android-sdk/* emulator
-      ''}
-
-      ${stdenv.lib.optionalString includeDocs ''
-        ln -s ${docs}/libexec/android-sdk/* docs
-      ''}
-
-      mkdir -p platforms
-      ${stdenv.lib.optionalString (platforms != []) ''
-        mkdir -p platforms
-        ${stdenv.lib.concatMapStrings (platform: ''
-          ln -s ${platform}/libexec/android-sdk/platforms/* platforms
-        '') platforms}
-      ''}
-      ${stdenv.lib.optionalString includeSources ''
-        mkdir -p sources
-        ${stdenv.lib.concatMapStrings (source: ''
-          ln -s ${source}/libexec/android-sdk/sources/* sources
-        '') sources}
-      ''}
-      ${stdenv.lib.optionalString (lldb != []) ''
-        mkdir -p lldb
-        ${stdenv.lib.concatMapStrings (lldb: ''
-          ln -s ${lldb}/libexec/android-sdk/lldb/* lldb
-        '') lldb}
-      ''}
-      ${stdenv.lib.optionalString (cmake != []) ''
-        mkdir -p cmake
-        ${stdenv.lib.concatMapStrings (cmake: ''
-          ln -s ${cmake}/libexec/android-sdk/cmake/* cmake
-        '') cmake}
-      ''}
-      ${stdenv.lib.optionalString includeNDK ''
-        ln -s ${ndk-bundle}/libexec/android-sdk/* ndk-bundle
-      ''}
       ${stdenv.lib.optionalString includeSystemImages ''
         mkdir -p system-images
         ${stdenv.lib.concatMapStrings (system-image: ''
@@ -227,18 +215,11 @@ rec {
           ln -s ${system-image}/libexec/android-sdk/system-images/$apiVersion/$type/* system-images/$apiVersion/$type
         '') system-images}
       ''}
-      ${stdenv.lib.optionalString useGoogleAPIs ''
-        mkdir -p add-ons
-        ${stdenv.lib.concatMapStrings (addon: ''
-          ln -s ${addon}/libexec/android-sdk/add-ons/* add-ons
-        '') google-apis}
-      ''}
-      ${stdenv.lib.optionalString useGoogleTVAddOns ''
-        mkdir -p add-ons
-        ${stdenv.lib.concatMapStrings (addon: ''
-          ln -s ${addon}/libexec/android-sdk/add-ons/* add-ons
-        '') google-tv-addons}
-      ''}
+
+      ${linkPlatformPlugins { name = "add-ons"; plugins = google-apis; check = useGoogleAPIs; }}
+      ${linkPlatformPlugins { name = "add-ons"; plugins = google-apis; check = useGoogleTVAddOns; }}
+
+      # Link extras
       ${stdenv.lib.concatMapStrings (identifier:
         let
           path = addons.extras."${identifier}".path;
@@ -258,7 +239,7 @@ rec {
       find $PWD/tools -not -path '*/\.*' -type f -executable -mindepth 1 -maxdepth 1 | while read i
       do
           ln -s $i $out/bin
-      done  
+      done
 
       find $PWD/tools/bin -not -path '*/\.*' -type f -executable -mindepth 1 -maxdepth 1 | while read i
       do
