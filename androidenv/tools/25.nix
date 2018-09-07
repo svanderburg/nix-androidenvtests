@@ -55,4 +55,6 @@ deployAndroidPackage {
     cd ..
     ${postInstall}
   '';
+
+  meta.licenses = lib.licenses.unfree;
 }

@@ -1,5 +1,5 @@
 {stdenv, unzip}:
-{package, os ? null, buildInputs ? [], patchInstructions ? "", ...}@args:
+{package, os ? null, buildInputs ? [], patchInstructions ? "", meta ? {}, ...}@args:
 
 let
   extraParams = removeAttrs args [ "package" "os" "buildInputs" "patchInstructions" ];
@@ -39,5 +39,5 @@ stdenv.mkDerivation ({
 
   meta = {
     description = package.displayName;
-  };
+  } // meta;
 } // extraParams)
