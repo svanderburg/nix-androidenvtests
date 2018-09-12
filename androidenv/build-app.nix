@@ -9,17 +9,17 @@
 assert release -> keyStore != null && keyAlias != null && keyStorePassword != null && keyAliasPassword != null;
 
 let
-  androidSdkArgNames = builtins.attrNames (builtins.functionArgs composeAndroidPackages);
-  extraParams = removeAttrs args ([ "name" ] ++ androidSdkArgNames);
+  androidSdkFormalArgs = builtins.functionArgs composeAndroidPackages;
+  extraArgs = removeAttrs args ([ "name" ] ++ builtins.attrNames androidSdkFormalArgs);
 
   # Extract the parameters meant for the Android SDK
-  androidParams = builtins.intersectAttrs (builtins.functionArgs composeAndroidPackages) args;
+  androidArgs = builtins.intersectAttrs androidSdkFormalArgs args;
 
-  androidsdkComposition = (composeAndroidPackages androidParams).androidsdk;
+  androidsdk = (composeAndroidPackages androidArgs).androidsdk;
 in
 stdenv.mkDerivation ({
-  name = stdenv.lib.replaceChars [" "] [""] name; # Android APKs cannot contain white spaces in their names
-  ANDROID_HOME = "${androidsdkComposition}/libexec/android-sdk";
+  name = stdenv.lib.replaceChars [" "] [""] name; # Android APKs may contain white spaces in their names, but Nix store paths cannot
+  ANDROID_HOME = "${androidsdk}/libexec/android-sdk";
   buildInputs = [ jdk ant ];
   buildPhase = ''
     ${stdenv.lib.optionalString release ''
@@ -42,4 +42,4 @@ stdenv.mkDerivation ({
     mkdir -p $out/nix-support
     echo "file binary-dist \"$(echo $out/*.apk)\"" > $out/nix-support/hydra-build-products
   '';
-} // extraParams)
+} // extraArgs)

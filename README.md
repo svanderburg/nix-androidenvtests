@@ -12,6 +12,11 @@ This repository is a standalone version for experimentation/testing purposes.
 All changes in this repository are supposed to (eventually) land in the upstream
 Nixpkgs repository.
 
+Prerequisites
+=============
+* A Linux-based or macOS-based installation of the [Nix package manager](http://nixos.org/nix)
+* [Nixpkgs](http://nixos.org/nixpkgs)
+
 Usage
 =====
 This Android build environment provides three major features and a number of
@@ -220,5 +225,5 @@ sh ./generate.sh
 License
 =======
 The contents of this package (except for the Android example project) is
-convered by the same license as Nixpkgs -- the
+covered by the same license as Nixpkgs -- the
 [MIT license](https://opensource.org/licenses/MIT).
