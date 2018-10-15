@@ -10,12 +10,10 @@ assert release -> keyStore != null && keyAlias != null && keyStorePassword != nu
 
 let
   androidSdkFormalArgs = builtins.functionArgs composeAndroidPackages;
-  extraArgs = removeAttrs args ([ "name" ] ++ builtins.attrNames androidSdkFormalArgs);
-
-  # Extract the parameters meant for the Android SDK
   androidArgs = builtins.intersectAttrs androidSdkFormalArgs args;
-
   androidsdk = (composeAndroidPackages androidArgs).androidsdk;
+
+  extraArgs = removeAttrs args ([ "name" ] ++ builtins.attrNames androidSdkFormalArgs);
 in
 stdenv.mkDerivation ({
   name = stdenv.lib.replaceChars [" "] [""] name; # Android APKs may contain white spaces in their names, but Nix store paths cannot
