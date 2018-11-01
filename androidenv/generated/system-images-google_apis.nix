@@ -102,8 +102,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86-17_r05.zip;
-        sha1 = "d89591526b66d7c475056b755dd20348bd6e5d75";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86-17_r06.zip;
+        sha1 = "7864c34faf0402b8923d8c6e609a5339f74cc8d6";
       
       };
   };
@@ -147,8 +147,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86-19_r36.zip;
-        sha1 = "a6957ddc57d25c94541161790da355c274536fbc";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86-19_r37.zip;
+        sha1 = "f02473420a166b3df7821d8ae5a623524058b4b8";
       
       };
   };
@@ -162,8 +162,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-19_r36.zip;
-        sha1 = "6350f216cf62674102f1dfef7c59f445087e9af9";
+        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-19_r37.zip;
+        sha1 = "b388072493ed010fe2ddf607c8c4239f54ce1a0b";
       
       };
   };
@@ -177,8 +177,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86-21_r28.zip;
-        sha1 = "e732a6ebec7ed0c15850d4d22318478fcdccad2d";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86-21_r29.zip;
+        sha1 = "1f5ac49e0ae603b0bfeda0c94cd7e0b850b9b50e";
       
       };
   };
@@ -192,8 +192,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-21_r28.zip;
-        sha1 = "1681f96c63264583230e2cab2a041cfeaee3a05e";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-21_r29.zip;
+        sha1 = "74ac387aec286fcee01259dcccd4762cbdb4b517";
       
       };
   };
@@ -207,8 +207,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-21_r28.zip;
-        sha1 = "4754c06a74e3fce9be711ead5ab0611569936968";
+        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-21_r29.zip;
+        sha1 = "1d0c428ac7f5eb49c7389ad0beb09f07cb989b45";
       
       };
   };
@@ -222,8 +222,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86-22_r22.zip;
-        sha1 = "c8eec9aad9930b6a621d195816b9852899ffa0e9";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86-22_r23.zip;
+        sha1 = "4ceda9ffd69d5b827a8cc2f56ccac62e72982b33";
       
       };
   };
@@ -237,8 +237,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-22_r22.zip;
-        sha1 = "4029cd28df2aa883f7a6b31cbeb1a8afaae78bff";
+        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-22_r23.zip;
+        sha1 = "0a11bdffa6132303baf87e4a531987a74d5f0792";
       
       };
   };
@@ -252,8 +252,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-22_r22.zip;
-        sha1 = "4a35a5b3e415bfc7efcb63827cf748808128c6f2";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-22_r23.zip;
+        sha1 = "1dfee1c382574c18e3aa2bc2047793169f3ab125";
       
       };
   };
@@ -267,8 +267,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86-23_r29.zip;
-        sha1 = "3dad5fb78e427194d24a1695309da86d6d7dadcb";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86-23_r30.zip;
+        sha1 = "1b8fd61e7e7c76d8c05a41b19370edfb015ed240";
       
       };
   };
@@ -282,8 +282,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-23_r29.zip;
-        sha1 = "9e7ab61ce2f2ab8f9dd4ce8b29c95231faecbbb3";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-23_r30.zip;
+        sha1 = "69a17c23c4e05e81a2820fe49884807fcebba546";
       
       };
   };
@@ -297,8 +297,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-23_r29.zip;
-        sha1 = "e42b2dd97f2ad7dd46d64e8595d283d1ffe4a149";
+        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-23_r30.zip;
+        sha1 = "c3966e3a25623a915902d879f90f6d9253dbb619";
       
       };
   };
@@ -312,8 +312,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86-24_r23.zip;
-        sha1 = "3275ffc6b43ae97f3085d12453bbdc4221eac657";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86-24_r24.zip;
+        sha1 = "7a1adb4aa13946830763644d014fc9c6cc1f921d";
       
       };
   };
@@ -327,8 +327,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-24_r23.zip;
-        sha1 = "03c0f46528cf5443fe034f997e31288f3bdbb2ac";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-24_r24.zip;
+        sha1 = "53b26e8868c7cd27dda31c71ee2bcf999d6b9ce2";
       
       };
   };
@@ -342,8 +342,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-24_r23.zip;
-        sha1 = "36c66dbc6a92bda1b8af1a808d7ef7bc28f3655c";
+        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-24_r24.zip;
+        sha1 = "85068d55673bbf9417db8d70107ceed0952b5a28";
       
       };
   };
@@ -357,8 +357,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/arm64-v8a-24_r23.zip;
-        sha1 = "1497e9b09b0cc7173318f83018589fb35050ac5e";
+        https://dl.google.com/android/repository/sys-img/google_apis/arm64-v8a-24_r24.zip;
+        sha1 = "93ab33d90fcdbb30ca2e927cd3eea447e933dfd9";
       
       };
   };
@@ -372,8 +372,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86-25_r14.zip;
-        sha1 = "85c4751135f90156fe1edc60e36869e48acc76b6";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86-25_r15.zip;
+        sha1 = "5948473077341265a0b21a53a7e0afc2f980187c";
       
       };
   };
@@ -387,8 +387,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-25_r14.zip;
-        sha1 = "e05c7517897a881cbf8d934eb78190a3949ef7fa";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-25_r15.zip;
+        sha1 = "5a81fc218a7fe82cc6af01f7fae54a8000900443";
       
       };
   };
@@ -402,8 +402,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-25_r14.zip;
-        sha1 = "c48b50509f819cfd4fae32c0bda9c823be2797a9";
+        https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-25_r15.zip;
+        sha1 = "813e25f9a5f6d775670ed6c5e67a39bffa1411bf";
       
       };
   };
@@ -417,8 +417,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/arm64-v8a-25_r14.zip;
-        sha1 = "0645573881d038185461bea715ac4b958d4628b9";
+        https://dl.google.com/android/repository/sys-img/google_apis/arm64-v8a-25_r15.zip;
+        sha1 = "c3049e32f031140757f71acb5b8f0179e6f27303";
       
       };
   };
@@ -432,8 +432,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86-26_r11.zip;
-        sha1 = "d9377c55ffd1cab14508ea258efe3e3841febd85";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86-26_r12.zip;
+        sha1 = "167c83bcfd87127c7376ce986b34701f74fe87ff";
       
       };
   };
@@ -447,8 +447,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-26_r11.zip;
-        sha1 = "ebc1cdb3a9f77ea47126a0c33f1509862a86432b";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-26_r12.zip;
+        sha1 = "fcd46121c3486e2a759d0707c015e0b12bbab9db";
       
       };
   };
@@ -462,8 +462,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86-27_r07.zip;
-        sha1 = "c26f73d5d6748a43a5da3f61fa86c00ed6e36c1b";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86-27_r08.zip;
+        sha1 = "623ee2638713b7dfde8044c91280c2afad5a1ade";
       
       };
   };
@@ -477,8 +477,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86-28_r05.zip;
-        sha1 = "71bd18190f227077fff8012113d75e76dda1303d";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86-28_r07.zip;
+        sha1 = "fe5d58355545ae82b0e6a55adc1d41573ac7dec1";
       
       };
   };
@@ -492,8 +492,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-28_r05.zip;
-        sha1 = "cd10ec70971b37d6aca9a0aa07475a604b8186ee";
+        https://dl.google.com/android/repository/sys-img/google_apis/x86_64-28_r07.zip;
+        sha1 = "068468683a56725326f741f75b6913ee1e7955ff";
       
       };
   };

@@ -252,8 +252,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/android/x86-16_r05.zip;
-        sha1 = "7ea16da3a8fdb880b1b290190fcc1bde2821c1e0";
+        https://dl.google.com/android/repository/sys-img/android/x86-16_r06.zip;
+        sha1 = "bf1bf8c5591346118d2235da1ad20e7be8a3e9cd";
       
       };
   };
@@ -267,8 +267,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/android/x86-17_r03.zip;
-        sha1 = "eb30274460ff0d61f3ed37862b567811bebd8270";
+        https://dl.google.com/android/repository/sys-img/android/x86-17_r04.zip;
+        sha1 = "03c6d022ab2dcbbcf655d78ba5ccb0431cadcaec";
       
       };
   };

@@ -58,7 +58,7 @@
       
         url = 
         https://dl.google.com/android/repository/sys-img/android-tv/x86-23_r17.zip;
-        sha1 = "8ac93a8d2867d568c06ee5ace493c917a420ee49";
+        sha1 = "6d42eb8f07e1c49c000e530fdb7de894144ea19b";
       
       };
   };
@@ -87,8 +87,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/android-tv/x86-24_r18.zip;
-        sha1 = "159aac1decde0583313e6ad87b5f6856d7cb887e";
+        https://dl.google.com/android/repository/sys-img/android-tv/x86-24_r19.zip;
+        sha1 = "478e7073f9fcd588bcce89946aa632fbf302ac6a";
       
       };
   };
@@ -102,8 +102,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/android-tv/x86-25_r12.zip;
-        sha1 = "601e9347dede68d14ab549ae9893a0890dcb7b16";
+        https://dl.google.com/android/repository/sys-img/android-tv/x86-25_r13.zip;
+        sha1 = "fda1743a87331b43b1ff35cd70f3276ae0b1836d";
       
       };
   };
@@ -117,8 +117,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/android-tv/x86-26_r10.zip;
-        sha1 = "cae5a211131168bb9b1945db9922a1ba30f096e6";
+        https://dl.google.com/android/repository/sys-img/android-tv/x86-26_r11.zip;
+        sha1 = "5c4b0b3c0b9d04a3364956a7ba31d30c33ea57e7";
       
       };
   };
@@ -132,8 +132,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/android-tv/x86-27_r05.zip;
-        sha1 = "50a8102e41dc9231532da122e3b53e61675c7957";
+        https://dl.google.com/android/repository/sys-img/android-tv/x86-27_r06.zip;
+        sha1 = "6b69f1e95a3db3d973e19a95ab5da1adc7750d54";
       
       };
   };
@@ -147,8 +147,8 @@
       archives.all = fetchurl {
       
         url = 
-        https://dl.google.com/android/repository/sys-img/android-tv/x86-28_r05.zip;
-        sha1 = "1e41da42407ca8db8dc47c652df99784c6a0d262";
+        https://dl.google.com/android/repository/sys-img/android-tv/x86-28_r07.zip;
+        sha1 = "3ed7e51036957cf350db7fa128cb485b61cbd061";
       
       };
   };

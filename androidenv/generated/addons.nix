@@ -525,13 +525,13 @@
     "extras;google;instantapps" = {
       name = "extras-google-instantapps";
       path = "extras/google/instantapps";
-      revision = "1.3.0";
-      displayName = "Instant Apps Development SDK";
+      revision = "1.5.0";
+      displayName = "Google Play Instant Development SDK";
       archives = {
       
         all = fetchurl {
-          url = https://dl.google.com/android/repository/aiasdk-1.3.0-1525823131.zip;
-          sha1 = "83da81493dc7e95e0200b7da53f0bd66c8f143e2";
+          url = https://dl.google.com/android/repository/iasdk-1.5.0-1538000167.zip;
+          sha1 = "6c282b9c686e819fe7f5ac8f2249d2479acb63b4";
         };
       
       };
