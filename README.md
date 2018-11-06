@@ -114,10 +114,33 @@ We can also deploy subsets of the Android SDK. For example, to only the the
 
 let
   androidComposition = androidenv.composeAndroidPackages {
-    ...
+    # ...
   };
 in
 androidComposition.platform-tools
+```
+
+Using predefine Android package compositions
+--------------------------------------------
+In addition to composing an Android package set manually, it is also possible
+to use a predefined composition that contains all basic packages for a specific
+Android version, such as version 9.0 (API-level 28).
+
+The following Nix expression can be used to deploy the entire SDK with all basic
+plugins:
+
+```nix
+{androidenv}:
+
+androidenv.androidPkgs_9_0.androidsdk
+```
+
+It is also possible to use one plugin only:
+
+```nix
+{androidenv}:
+
+androidenv.androidPkgs_9_0.platform-tools
 ```
 
 Building an Android application

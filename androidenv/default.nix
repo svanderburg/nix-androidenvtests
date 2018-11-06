@@ -20,4 +20,9 @@ rec {
     inherit (pkgs) stdenv;
     inherit composeAndroidPackages;
   };
+
+  androidPkgs_9_0 = composeAndroidPackages {
+    platformVersions = [ "28" ];
+    abiVersions = [ "x86" "x86_64"];
+  };
 }
