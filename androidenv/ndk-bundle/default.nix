@@ -6,11 +6,12 @@ in
 deployAndroidPackage {
   inherit package os;
   buildInputs = [ autopatchelf makeWrapper ];
+  libs_x86_64 = lib.optionalString (os == "linux") (lib.makeLibraryPath [ pkgs.glibc pkgs.stdenv.cc.cc pkgs.ncurses5 ]);
   patchInstructions = lib.optionalString (os == "linux") ''
     patchShebangs .
 
     patch -p1 \
-      --no-backup-if-mismatch < ${./make_standalone_toolchain.py_17.patch}
+      --no-backup-if-mismatch < ${./make_standalone_toolchain.py_18.patch}
     wrapProgram build/tools/make_standalone_toolchain.py --prefix PATH : "${runtime_paths}"
 
     # TODO: allow this stuff
@@ -30,6 +31,9 @@ deployAndroidPackage {
         sed -i -e 's|^PROGDIR=`dirname $0`|PROGDIR=`dirname $(readlink -f $(which $0))`|' $i
     done
 
+    # Patch executables
+    autopatchelf prebuilt/linux-x86_64/bin
+
     # wrap
     for i in ndk-build
     do
@@ -40,7 +44,7 @@ deployAndroidPackage {
     mkdir -p $out/bin
     for i in ndk-build
     do
-        ln -sf $i $out/bin/$i
+        ln -sf ../../libexec/android-sdk/ndk-bundle/$i $out/bin/$i
     done
   '';
 }

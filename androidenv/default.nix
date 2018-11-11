@@ -12,7 +12,7 @@ rec {
   };
 
   buildApp = import ./build-app.nix {
-    inherit (pkgs) stdenv jdk ant;
+    inherit (pkgs) stdenv jdk ant gnumake gawk;
     inherit composeAndroidPackages;
   };
 

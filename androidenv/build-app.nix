@@ -1,4 +1,4 @@
-{ composeAndroidPackages, stdenv, ant, jdk }:
+{ composeAndroidPackages, stdenv, ant, jdk, gnumake, gawk }:
 
 { name
 , release ? false, keyStore ? null, keyAlias ? null, keyStorePassword ? null, keyAliasPassword ? null
@@ -31,6 +31,11 @@ stdenv.mkDerivation ({
 
     export ANDROID_SDK_HOME=`pwd` # Key files cannot be stored in the user's home directory. This overrides it.
 
+    ${stdenv.lib.optionalString (args ? includeNDK && args.includeNDK) ''
+      export GNUMAKE=${gnumake}/bin/make
+      export NDK_HOST_AWK=${gawk}/bin/gawk
+      ${androidsdk}/libexec/android-sdk/ndk-bundle/ndk-build
+    ''}
     ant ${antFlags} ${if release then "release" else "debug"}
   '';
   installPhase = ''
