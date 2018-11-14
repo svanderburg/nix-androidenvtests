@@ -166,6 +166,9 @@ androidenv.buildApp {
   # Any Android SDK parameters that install all the relevant plugins that a
   # build requires
   platformVersions = [ "24" ];
+
+  # When we include the NDK, then ndk-build is invoked before Ant gets invoked
+  includeNDK = true;
 }
 ```
 

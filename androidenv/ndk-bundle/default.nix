@@ -6,7 +6,7 @@ in
 deployAndroidPackage {
   inherit package os;
   buildInputs = [ autopatchelf makeWrapper ];
-  libs_x86_64 = lib.optionalString (os == "linux") (lib.makeLibraryPath [ pkgs.glibc pkgs.stdenv.cc.cc pkgs.ncurses5 ]);
+  libs_x86_64 = lib.optionalString (os == "linux") (lib.makeLibraryPath [ pkgs.glibc pkgs.stdenv.cc.cc pkgs.ncurses5 pkgs.zlib pkgs.libcxx ]);
   patchInstructions = lib.optionalString (os == "linux") ''
     patchShebangs .
 
@@ -15,15 +15,10 @@ deployAndroidPackage {
     wrapProgram build/tools/make_standalone_toolchain.py --prefix PATH : "${runtime_paths}"
 
     # TODO: allow this stuff
-    rm -rf docs sources tests
-    # We only support cross compiling with gcc for now
-    rm -rf toolchains/*-clang* toolchains/llvm*
+    rm -rf docs tests
 
-    find toolchains \( \
-        \( -type f -a -name "*.so*" \) -o \
-        \( -type f -a -perm -0100 \) \
-        \) -exec patchelf --set-interpreter ${pkgs.stdenv.cc.libc.out}/lib/ld-*so.? \
-                          --set-rpath ${lib.makeLibraryPath [ pkgs.libcxx pkgs.zlib pkgs.ncurses5 ]} {} \;
+    # Patch the executables of the toolchains, but not the libraries -- they are needed for crosscompiling
+    find toolchains -type d -name bin -exec autopatchelf {} \;
 
     # fix ineffective PROGDIR / MYNDKDIR determination
     for i in ndk-build
@@ -32,7 +27,7 @@ deployAndroidPackage {
     done
 
     # Patch executables
-    autopatchelf prebuilt/linux-x86_64/bin
+    autopatchelf prebuilt/linux-x86_64
 
     # wrap
     for i in ndk-build

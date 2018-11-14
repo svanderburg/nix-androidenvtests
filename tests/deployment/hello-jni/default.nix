@@ -1,8 +1,8 @@
 {androidenv, release ? false, platformVersion}:
 
 androidenv.buildApp {
-  name = "MyFirstApp-${if release then "release" else "debug"}";
-  src = ../../src/myfirstapp;
+  name = "hello-jni-${if release then "release" else "debug"}";
+  src = ../../src/hello-jni;
 
   antFlags = "-Dtarget=android-${platformVersion}";
   inherit release;
@@ -12,4 +12,5 @@ androidenv.buildApp {
   keyAliasPassword = "myfirstapp";
 
   platformVersions = [ platformVersion ];
+  includeNDK = true;
 }
