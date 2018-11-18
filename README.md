@@ -28,9 +28,9 @@ The first use case is deploying the SDK with a desired set of plugins or subsets
 of an SDK.
 
 ```nix
-{androidenv}:
-
 let
+  androidenv = import ./androidenv {};
+
   androidComposition = androidenv.composeAndroidPackages {
     toolsVersion = "25.2.5";
     platformToolsVersion = "27.0.1";
@@ -110,9 +110,9 @@ We can also deploy subsets of the Android SDK. For example, to only the the
 `platform-tools` package, you can evaluate the following expression:
 
 ```nix
-{androidenv}:
-
 let
+  androidenv = import ./androidenv {};
+
   androidComposition = androidenv.composeAndroidPackages {
     # ...
   };
@@ -130,8 +130,9 @@ The following Nix expression can be used to deploy the entire SDK with all basic
 plugins:
 
 ```nix
-{androidenv}:
-
+let
+  androidenv = import ./androidenv {};
+in
 androidenv.androidPkgs_9_0.androidsdk
 ```
 
@@ -150,8 +151,9 @@ project and automatically deploy all the Android plugins that a project
 requires.
 
 ```nix
-{androidenv}:
-
+let
+  androidenv = import ./androidenv {};
+in
 androidenv.buildApp {
   name = "MyAndroidApp";
   src = ./myappsources;
@@ -192,8 +194,9 @@ An emulator spawn script can be configured by invoking the `emulateApp {}`
 function:
 
 ```nix
-{androidenv}:
-
+let
+  androidenv = import ./androidenv {};
+in
 androidenv.emulateApp {
   name = "emulate-MyAndroidApp";
   platformVersion = "24";
@@ -207,8 +210,9 @@ It is also possible to specify an APK to deploy inside the emulator
 and the package and activity names to launch it:
 
 ```nix
-{androidenv}:
-
+let
+  androidenv = import ./androidenv {};
+in
 androidenv.emulateApp {
   name = "emulate-MyAndroidApp";
   platformVersion = "24";
