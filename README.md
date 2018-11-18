@@ -62,6 +62,7 @@ specified plugin versions. By default, most plugins are disabled. Notable
 exceptions are the tools, platform-tools and build-tools sub packages.
 
 The following parameters are supported:
+
 * `toolsVersion`, specifies the version of the tools package to use
 * `platformsToolsVersion` specifies the version of the `platform-tools` plugin
 * `buildToolsVersion` specifies the versions of the `build-tools` plugins to
@@ -81,6 +82,7 @@ The following parameters are supported:
 
 For each platform version that has been specified, we can apply the following
 options:
+
 * `includeSystemImages` specifies whether a system image for each platform SDK
   should be included.
 * `includeSources` specifies whether the sources for each SDK version should be
@@ -91,6 +93,7 @@ options:
   Google TV add-on should be included.
 
 For each requested system image we can specify the following options:
+
 * `systemImageTypes` specifies what kind of system images should be included.
   Defaults to: `default`.
 * `abiVersions` specifies what kind of ABI version of each system image should
