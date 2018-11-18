@@ -19,7 +19,7 @@ Prerequisites
 
 Usage
 =====
-This Android build environment provides three major features and a number of
+The Android build environment provides three major features and a number of
 supporting features.
 
 Deploying an Android SDK installation with plugins
@@ -234,7 +234,8 @@ When using any of the previously shown functions, it may be a bit inconvenient
 to find out what options are supported, since the Android SDK provides many
 plugins.
 
-A shell script can be used to retrieve all possible options:
+A shell script in the `androidenv/` sub directory can be used to retrieve all
+possible options:
 
 ```bash
 sh ./querypackages.sh packages build-tools
@@ -246,7 +247,8 @@ generated `packages.nix` expression.
 Updating the generated expressions
 ----------------------------------
 Most of the Nix expressions are generated from XML files that the Android
-package manager uses. To update the expressions run the `generate.sh` script:
+package manager uses. To update the expressions run the `generate.sh` script
+that is stored in the `androidenv/` sub directory:
 
 ```bash
 sh ./generate.sh
