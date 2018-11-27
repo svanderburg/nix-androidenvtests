@@ -48,7 +48,7 @@ let
     includeNDK = false;
     ndkVersion = "16.1.4479499";
     useGoogleAPIs = false;
-    useGoogleAddOns = false;
+    useGoogleTVAddOns = false;
     includeExtras = [
       "extras;google;gcm"
     ];
