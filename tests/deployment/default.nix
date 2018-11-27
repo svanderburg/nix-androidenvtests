@@ -13,6 +13,19 @@ let
     };
 in
 rec {
+  # Android SDK composition
+  android_composition = builtins.listToAttrs (map (system:
+    let
+      pkgs = import nixpkgs { inherit system; };
+      androidenv = getAndroidEnv pkgs;
+    in
+    { name = system;
+      value = import ./android-composition {
+        inherit androidenv;
+      };
+    }
+  ) systems);
+
   # myfirstapp jobs
 
   myfirstapp_debug = builtins.listToAttrs (map (system:
