@@ -12,13 +12,18 @@ deployAndroidPackage {
 
     patch -p1 \
       --no-backup-if-mismatch < ${./make_standalone_toolchain.py_18.patch}
-    wrapProgram build/tools/make_standalone_toolchain.py --prefix PATH : "${runtime_paths}"
+    wrapProgram $(pwd)/build/tools/make_standalone_toolchain.py --prefix PATH : "${runtime_paths}"
 
     # TODO: allow this stuff
     rm -rf docs tests
 
     # Patch the executables of the toolchains, but not the libraries -- they are needed for crosscompiling
-    find toolchains -type d -name bin -exec autopatchelf {} \;
+    libs_x86_64=$out/libexec/android-sdk/ndk-bundle/toolchains/renderscript/prebuilt/linux-x86_64/lib64:$libs_x86_64
+
+    find toolchains -type d -name bin | while read dir
+    do
+        autopatchelf "$dir"
+    done
 
     # fix ineffective PROGDIR / MYNDKDIR determination
     for i in ndk-build
@@ -42,4 +47,6 @@ deployAndroidPackage {
         ln -sf ../../libexec/android-sdk/ndk-bundle/$i $out/bin/$i
     done
   '';
+
+  noAuditTmpdir = true; # Audit script gets invoked by the build/ component in the path for the make standalone script
 }
