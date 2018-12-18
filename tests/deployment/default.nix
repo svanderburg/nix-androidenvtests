@@ -1,5 +1,6 @@
 { nixpkgs ? <nixpkgs>
 , systems ? [ "x86_64-linux" ]
+, config ? {}
 , buildPlatformVersions ? [ "16" ]
 , emulatePlatformVersions ? [ "23" ]
 , abiVersions ? [ "x86" ]
@@ -16,7 +17,7 @@ rec {
   # Android SDK composition
   android_composition = builtins.listToAttrs (map (system:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system config; };
       androidenv = getAndroidEnv pkgs;
     in
     { name = system;
@@ -30,7 +31,7 @@ rec {
 
   myfirstapp_debug = builtins.listToAttrs (map (system:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system config; };
       androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
@@ -48,7 +49,7 @@ rec {
 
   myfirstapp_release = builtins.listToAttrs (map (system:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system config; };
       androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
@@ -66,7 +67,7 @@ rec {
 
   emulate_myfirstapp_debug = builtins.listToAttrs (map (system:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system config; };
       androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
@@ -94,7 +95,7 @@ rec {
 
   emulate_myfirstapp_release = builtins.listToAttrs (map (system:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system config; };
       androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
@@ -124,7 +125,7 @@ rec {
 
   hello_jni_debug = builtins.listToAttrs (map (system:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system config; };
       androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
@@ -142,7 +143,7 @@ rec {
 
   hello_jni_release = builtins.listToAttrs (map (system:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system config; };
       androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
@@ -160,7 +161,7 @@ rec {
 
   emulate_hello_jni_debug = builtins.listToAttrs (map (system:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system config; };
       androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;
@@ -188,7 +189,7 @@ rec {
 
   emulate_hello_jni_release = builtins.listToAttrs (map (system:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system config; };
       androidenv = getAndroidEnv pkgs;
     in
     { name = "host_"+system;

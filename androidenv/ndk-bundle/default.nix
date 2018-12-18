@@ -5,7 +5,7 @@ let
 in
 deployAndroidPackage {
   inherit package os;
-  buildInputs = [ autopatchelf makeWrapper ];
+  buildInputs = [ autopatchelf makeWrapper pkgs.python2 ];
   libs_x86_64 = lib.optionalString (os == "linux") (lib.makeLibraryPath [ pkgs.glibc pkgs.stdenv.cc.cc pkgs.ncurses5 pkgs.zlib pkgs.libcxx ]);
   patchInstructions = lib.optionalString (os == "linux") ''
     patchShebangs .
