@@ -1,6 +1,6 @@
 { nixpkgs ? <nixpkgs>
 , systems ? [ "x86_64-linux" ]
-, config ? {}
+, config ? { android_sdk.accept_license = true; }
 , buildPlatformVersions ? [ "16" ]
 , emulatePlatformVersions ? [ "23" ]
 , abiVersions ? [ "x86" ]
