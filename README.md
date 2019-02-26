@@ -123,8 +123,8 @@ in
 androidComposition.platform-tools
 ```
 
-Using predefine Android package compositions
---------------------------------------------
+Using predefined Android package compositions
+---------------------------------------------
 In addition to composing an Android package set manually, it is also possible
 to use a predefined composition that contains all basic packages for a specific
 Android version, such as version 9.0 (API-level 28).
@@ -256,6 +256,11 @@ that is stored in the `androidenv/` sub directory:
 ```bash
 sh ./generate.sh
 ```
+
+Test cases
+==========
+The `tests/` sub folder contains a collection of testcases that can be used
+to validate the Android build functionality.
 
 License
 =======
