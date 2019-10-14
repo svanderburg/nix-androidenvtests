@@ -118,8 +118,9 @@ rec {
   system-images = stdenv.lib.flatten (map (apiVersion:
     map (type:
       map (abiVersion:
-        deployAndroidPackage {
-          inherit os;
+        import ./system-image.nix {
+          inherit deployAndroidPackage os type;
+          inherit (stdenv) lib;
           package = system-images-packages.${apiVersion}.${type}.${abiVersion};
         }
       ) abiVersions
