@@ -24,23 +24,30 @@
 {fetchurl}:
 
 {
-  <xsl:for-each select="remotePackage[starts-with(@path, 'system-images;')]">
+  <xsl:for-each select="remotePackage[starts-with(@path, 'system-images;') and (not(type-details/codename) or type-details/codename != 'Q') and ( ) ]/archives/archive"> <!-- Blacklist Q versions and API version 8, revision 1, because their names are duplicates -->
     <xsl:variable name="revision">
-      <xsl:value-of select="type-details/api-level" />-<xsl:value-of select="type-details/tag/id" />-<xsl:value-of select="type-details/abi" />
+      <xsl:value-of select="../../type-details/api-level" />-<xsl:value-of select="../../type-details/tag/id" />-<xsl:value-of select="../../type-details/abi" />
     </xsl:variable>
 
-    "<xsl:value-of select="type-details/api-level" />".<xsl:value-of select="type-details/tag/id" />."<xsl:value-of select="type-details/abi" />" = {
+    <xsl:variable name="os">
+      <xsl:choose>
+        <xsl:when test="host-os">
+          <xsl:value-of select="host-os" />
+        </xsl:when>
+        <xsl:otherwise>all</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    "<xsl:value-of select="../../type-details/api-level" />".<xsl:value-of select="../../type-details/tag/id" />."<xsl:value-of select="../../type-details/abi" />".<xsl:value-of select="$os" /> = {
       name = "system-image-<xsl:value-of select="$revision" />";
-      path = "<xsl:value-of select="translate(@path, ';', '/')" />";
+      path = "<xsl:value-of select="translate(../../@path, ';', '/')" />";
       revision = "<xsl:value-of select="$revision" />";
-      displayName = "<xsl:value-of select="display-name" />";
-      archives.all = fetchurl {
-      <xsl:for-each select="archives/archive">
+      displayName = "<xsl:value-of select="../../display-name" />";
+      archives.<xsl:value-of select="$os" /> = fetchurl {
         url = <xsl:call-template name="repository-url"/>;
         sha1 = "<xsl:value-of select="complete/checksum" />";
-      </xsl:for-each>
       };
-  };
+    };
   </xsl:for-each>
 }
   </xsl:template>

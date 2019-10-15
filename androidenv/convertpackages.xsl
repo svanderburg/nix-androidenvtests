@@ -28,7 +28,7 @@
 
 {
   <!-- Convert all remote packages -->
-  <xsl:for-each select="remotePackage"><xsl:sort select="@path" />
+  <xsl:for-each select="remotePackage[@path != 'cmdline-tools;latest' and not(@path = 'platforms;android-29' and revision/major = '1')]"><xsl:sort select="@path" /> <!-- Query all, but blacklist: cmdline-tools;latest and a duplicate platform-29, because it is an alias and breaks the generation -->
 
   <!-- Extract the package name from the path -->
   <xsl:variable name="name">

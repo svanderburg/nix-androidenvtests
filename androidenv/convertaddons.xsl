@@ -77,8 +77,8 @@
 
   extras = {
     <!-- Convert all extras and maven artefacts -->
-    <xsl:for-each select="remotePackage[type-details/@xsi:type='addon:extraDetailsType' or type-details/@xsi:type='addon:mavenType']"><xsl:sort select="@path" />
-    
+    <xsl:for-each select="remotePackage[not(contains(@path, '-alpha')) and (type-details/@xsi:type='addon:extraDetailsType' or type-details/@xsi:type='addon:mavenType')]"><xsl:sort select="@path" /> <!-- We blacklist all alpha packages because they appear in the list multiple times -->
+
     <!-- Compose revision string from revision attributes -->
     <xsl:variable name="revision">
       <xsl:choose>

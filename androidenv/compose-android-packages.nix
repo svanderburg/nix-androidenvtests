@@ -1,10 +1,10 @@
 {stdenv, fetchurl, requireFile, makeWrapper, unzip, autopatchelf, pkgs, pkgs_i686}:
 
 { toolsVersion ? "25.2.5"
-, platformToolsVersion ? "28.0.1"
+, platformToolsVersion ? "29.0.4"
 , buildToolsVersions ? [ "28.0.3" ]
 , includeEmulator ? false
-, emulatorVersion ? "28.0.14"
+, emulatorVersion ? "29.2.4"
 , platformVersions ? []
 , includeSources ? false
 , includeDocs ? false
@@ -118,10 +118,13 @@ rec {
   system-images = stdenv.lib.flatten (map (apiVersion:
     map (type:
       map (abiVersion:
+        let
+          package = system-images-packages.${apiVersion}.${type}.${abiVersion};
+        in
         import ./system-image.nix {
           inherit deployAndroidPackage os type;
           inherit (stdenv) lib;
-          package = system-images-packages.${apiVersion}.${type}.${abiVersion};
+          package = package."${os}" or package.all;
         }
       ) abiVersions
     ) systemImageTypes

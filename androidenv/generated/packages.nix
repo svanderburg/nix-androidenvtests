@@ -877,6 +877,120 @@
     };
   };
   
+  "build-tools"."29.0.0" = {
+    
+    name = "build-tools";
+    path = "build-tools/29.0.0";
+    revision = "29.0.0";
+    displayName = "Android SDK Build-Tools 29";
+    archives = {
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29-linux.zip;
+        sha1 = "ad314caf1802209c4b00a5f3517af5ceb0d48eae";
+      };
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29-macosx.zip;
+        sha1 = "35dc6bc7a53bd9d206847e72f02cab21cfdaa869";
+      };
+      
+    };
+  };
+  
+  "build-tools"."29.0.0-rc1" = {
+    
+    name = "build-tools";
+    path = "build-tools/29.0.0-rc1";
+    revision = "29.0.0-rc1";
+    displayName = "Android SDK Build-Tools 29-rc1";
+    archives = {
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29-rc1-linux.zip;
+        sha1 = "1c897f5885ac5468613e40e1ea598c21c05d345d";
+      };
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29-rc1-macosx.zip;
+        sha1 = "f066c0d9ea2f0d8a0a9cc7b2ca0a467a570ab034";
+      };
+      
+    };
+  };
+  
+  "build-tools"."29.0.0-rc2" = {
+    
+    name = "build-tools";
+    path = "build-tools/29.0.0-rc2";
+    revision = "29.0.0-rc2";
+    displayName = "Android SDK Build-Tools 29-rc2";
+    archives = {
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29-rc2-linux.zip;
+        sha1 = "b4b41d429c35b42db07b6c65d4aa998ba8c4093c";
+      };
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29-rc2-macosx.zip;
+        sha1 = "7a960367999169ccac5dbc60817e5f1725c4c738";
+      };
+      
+    };
+  };
+  
+  "build-tools"."29.0.0-rc3" = {
+    
+    name = "build-tools";
+    path = "build-tools/29.0.0-rc3";
+    revision = "29.0.0-rc3";
+    displayName = "Android SDK Build-Tools 29-rc3";
+    archives = {
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29-rc3-linux.zip;
+        sha1 = "8b7177f198e8b92da8f9537aaf859f6edf222b01";
+      };
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29-rc3-macosx.zip;
+        sha1 = "643e8d76625f6e2cfcd5494e50bae5e14725ec0c";
+      };
+      
+    };
+  };
+  
+  "build-tools"."29.0.1" = {
+    
+    name = "build-tools";
+    path = "build-tools/29.0.1";
+    revision = "29.0.1";
+    displayName = "Android SDK Build-Tools 29.0.1";
+    archives = {
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29.0.1-linux.zip;
+        sha1 = "fc209e5d91ab2daeac24345a5cb17261940547e4";
+      };
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29.0.1-macosx.zip;
+        sha1 = "46ae9b1d1e2a67241d7da9c2cd8eae42f24cc6cd";
+      };
+      
+    };
+  };
+  
+  "build-tools"."29.0.2" = {
+    
+    name = "build-tools";
+    path = "build-tools/29.0.2";
+    revision = "29.0.2";
+    displayName = "Android SDK Build-Tools 29.0.2";
+    archives = {
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29.0.2-linux.zip;
+        sha1 = "c0fc7e5c37ac96bfd0c611802e8ab36d0e71b398";
+      };
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/build-tools_r29.0.2-macosx.zip;
+        sha1 = "f781d9e03d5c2debcf51fed3792ee7a9d066723f";
+      };
+      
+    };
+  };
+  
   "cmake"."3.10.2" = {
     
     name = "cmake";
@@ -915,6 +1029,25 @@
     };
   };
   
+  "cmdline-tools"."1.0-rc01" = {
+    
+    name = "cmdline-tools";
+    path = "cmdline-tools/1.0-alpha01";
+    revision = "1.0-rc01";
+    displayName = "Android SDK Command-line Tools";
+    archives = {
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/commandlinetools-linux-5842447_latest.zip;
+        sha1 = "f331fcfae47e0d0a478e3f2d30ce70b4a69439bc";
+      };
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/commandlinetools-mac-5842447_latest.zip;
+        sha1 = "65e2c7b86b48a3d43d27a9c936fc1ccf7ba01055";
+      };
+      
+    };
+  };
+  
   "docs"."1" = {
     
     name = "docs";
@@ -931,84 +1064,51 @@
     };
   };
   
-  "emulator"."27.3.10".linux = {
+  "emulator"."29.2.1".macosx = {
     
     name = "emulator";
     path = "emulator";
-    revision = "27.3.10";
-    displayName = "Android Emulator";
-    archives = {
-      linux = fetchurl {
-        url = https://dl.google.com/android/repository/emulator-linux-4969155.zip;
-        sha1 = "5b037b25bc6567fda3071457f0009c057670d9e8";
-      };
-      
-    };
-  };
-  
-  "emulator"."27.3.10".macosx = {
-    
-    name = "emulator";
-    path = "emulator";
-    revision = "27.3.10";
+    revision = "29.2.1";
     displayName = "Android Emulator";
     archives = {
       macosx = fetchurl {
-        url = https://dl.google.com/android/repository/emulator-darwin-4969155.zip;
-        sha1 = "28d2b51ee5c84bc544deee433419f33dc9e05b66";
+        url = https://dl.google.com/android/repository/emulator-darwin-5889189.zip;
+        sha1 = "ccee1a25339c8f5c059abf7297625a6e91fe137c";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/emulator-linux-5889189.zip;
+        sha1 = "ebbaff0512ef72ba69d83fbc700c58f25e9edc9d";
       };
       
     };
   };
   
-  "emulator"."27.3.10".windows = {
+  "emulator"."28.0.25".windows = {
     
     name = "emulator";
     path = "emulator";
-    revision = "27.3.10";
+    revision = "28.0.25";
     displayName = "Android Emulator";
     archives = {
       
     };
   };
   
-  "emulator"."28.0.14".linux = {
+  "emulator"."29.2.4".linux = {
     
     name = "emulator";
     path = "emulator";
-    revision = "28.0.14";
+    revision = "29.2.4";
     displayName = "Android Emulator";
     archives = {
       linux = fetchurl {
-        url = https://dl.google.com/android/repository/emulator-linux-5092175.zip;
-        sha1 = "062ef9a1f6759481de897d6c5602d9d66e958a0b";
+        url = https://dl.google.com/android/repository/emulator-linux-5933890.zip;
+        sha1 = "4dd5827e84bb7b9053f8b5675bcb7d40b40de590";
       };
-      
-    };
-  };
-  
-  "emulator"."28.0.14".macosx = {
-    
-    name = "emulator";
-    path = "emulator";
-    revision = "28.0.14";
-    displayName = "Android Emulator";
-    archives = {
       macosx = fetchurl {
-        url = https://dl.google.com/android/repository/emulator-darwin-5092175.zip;
-        sha1 = "6dc13599bddd5c2acdb559b25201c92a801d157c";
+        url = https://dl.google.com/android/repository/emulator-darwin-5933890.zip;
+        sha1 = "39c8ef5ec62e74feec7ef8941037be277c870f02";
       };
-      
-    };
-  };
-  
-  "emulator"."28.0.14".windows = {
-    
-    name = "emulator";
-    path = "emulator";
-    revision = "28.0.14";
-    displayName = "Android Emulator";
-    archives = {
       
     };
   };
@@ -1127,6 +1227,101 @@
     };
   };
   
+  "ndk-bundle"."20.0.5594570" = {
+    
+    name = "ndk-bundle";
+    path = "ndk-bundle";
+    revision = "20.0.5594570";
+    displayName = "NDK";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-darwin-x86_64.zip;
+        sha1 = "96d5f1c50452596912d1982439c514194b5751e6";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-linux-x86_64.zip;
+        sha1 = "8665fc84a1b1f0d6ab3b5fdd1e30200cc7b9adff";
+      };
+      
+    };
+  };
+  
+  "ndk-bundle"."20.0.5471264-rc3" = {
+    
+    name = "ndk-bundle";
+    path = "ndk-bundle";
+    revision = "20.0.5471264-rc3";
+    displayName = "NDK";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-beta3-darwin-x86_64.zip;
+        sha1 = "665a035cadb0dd03e6502ba25c18643f6e4ede24";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-beta3-linux-x86_64.zip;
+        sha1 = "674d8fb0e0df8e8be1c31fa321eb176548a19ba3";
+      };
+      
+    };
+  };
+  
+  "ndk-bundle"."20.0.5392854-rc2" = {
+    
+    name = "ndk-bundle";
+    path = "ndk-bundle";
+    revision = "20.0.5392854-rc2";
+    displayName = "NDK";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-beta2-darwin-x86_64.zip;
+        sha1 = "cd94191ace6b31ec9af1cc370173e16934e1cb8b";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-beta2-linux-x86_64.zip;
+        sha1 = "8285ae2e24a7232fd0cbfb55e955c8586ef2ee02";
+      };
+      
+    };
+  };
+  
+  "ndk-bundle"."19.2.5345600" = {
+    
+    name = "ndk-bundle";
+    path = "ndk-bundle";
+    revision = "19.2.5345600";
+    displayName = "NDK";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r19c-darwin-x86_64.zip;
+        sha1 = "f46b8193109bba8a58e0461c1a48f4534051fb25";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r19c-linux-x86_64.zip;
+        sha1 = "fd94d0be6017c6acbd193eb95e09cf4b6f61b834";
+      };
+      
+    };
+  };
+  
+  "ndk-bundle"."19.0.5232133" = {
+    
+    name = "ndk-bundle";
+    path = "ndk-bundle";
+    revision = "19.0.5232133";
+    displayName = "NDK";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r19-darwin-x86_64.zip;
+        sha1 = "86c1a962601b23b8a6d3d535c93b4b0bc4f29249";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r19-linux-x86_64.zip;
+        sha1 = "f02ad84cb5b6e1ff3eea9e6168037c823408c8ac";
+      };
+      
+    };
+  };
+  
   "ndk-bundle"."18.1.5063045" = {
     
     name = "ndk-bundle";
@@ -1146,6 +1341,196 @@
     };
   };
   
+  "ndk-bundle"."17.2.4988734" = {
+    
+    name = "ndk-bundle";
+    path = "ndk-bundle";
+    revision = "17.2.4988734";
+    displayName = "NDK";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r17c-darwin-x86_64.zip;
+        sha1 = "f97e3d7711497e3b4faf9e7b3fa0f0da90bb649c";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r17c-linux-x86_64.zip;
+        sha1 = "12cacc70c3fd2f40574015631c00f41fb8a39048";
+      };
+      
+    };
+  };
+  
+  "ndk-bundle"."16.1.4479499" = {
+    
+    name = "ndk-bundle";
+    path = "ndk-bundle";
+    revision = "16.1.4479499";
+    displayName = "NDK";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r16b-darwin-x86_64.zip;
+        sha1 = "e51e615449b98c716cf912057e2682e75d55e2de";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip;
+        sha1 = "42aa43aae89a50d1c66c3f9fdecd676936da6128";
+      };
+      
+    };
+  };
+  
+  "ndk"."16.1.4479499" = {
+    
+    name = "ndk";
+    path = "ndk/16.1.4479499";
+    revision = "16.1.4479499";
+    displayName = "NDK (Side by side) 16.1.4479499";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r16b-darwin-x86_64.zip;
+        sha1 = "e51e615449b98c716cf912057e2682e75d55e2de";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip;
+        sha1 = "42aa43aae89a50d1c66c3f9fdecd676936da6128";
+      };
+      
+    };
+  };
+  
+  "ndk"."17.2.4988734" = {
+    
+    name = "ndk";
+    path = "ndk/17.2.4988734";
+    revision = "17.2.4988734";
+    displayName = "NDK (Side by side) 17.2.4988734";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r17c-darwin-x86_64.zip;
+        sha1 = "f97e3d7711497e3b4faf9e7b3fa0f0da90bb649c";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r17c-linux-x86_64.zip;
+        sha1 = "12cacc70c3fd2f40574015631c00f41fb8a39048";
+      };
+      
+    };
+  };
+  
+  "ndk"."18.1.5063045" = {
+    
+    name = "ndk";
+    path = "ndk/18.1.5063045";
+    revision = "18.1.5063045";
+    displayName = "NDK (Side by side) 18.1.5063045";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r18b-darwin-x86_64.zip;
+        sha1 = "98cb9909aa8c2dab32db188bbdc3ac6207e09440";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r18b-linux-x86_64.zip;
+        sha1 = "500679655da3a86aecf67007e8ab230ea9b4dd7b";
+      };
+      
+    };
+  };
+  
+  "ndk"."19.0.5232133" = {
+    
+    name = "ndk";
+    path = "ndk/19.0.5232133";
+    revision = "19.0.5232133";
+    displayName = "NDK (Side by side) 19.0.5232133";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r19-darwin-x86_64.zip;
+        sha1 = "86c1a962601b23b8a6d3d535c93b4b0bc4f29249";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r19-linux-x86_64.zip;
+        sha1 = "f02ad84cb5b6e1ff3eea9e6168037c823408c8ac";
+      };
+      
+    };
+  };
+  
+  "ndk"."19.2.5345600" = {
+    
+    name = "ndk";
+    path = "ndk/19.2.5345600";
+    revision = "19.2.5345600";
+    displayName = "NDK (Side by side) 19.2.5345600";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r19c-darwin-x86_64.zip;
+        sha1 = "f46b8193109bba8a58e0461c1a48f4534051fb25";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r19c-linux-x86_64.zip;
+        sha1 = "fd94d0be6017c6acbd193eb95e09cf4b6f61b834";
+      };
+      
+    };
+  };
+  
+  "ndk"."20.0.5392854-rc2" = {
+    
+    name = "ndk";
+    path = "ndk/20.0.5392854";
+    revision = "20.0.5392854-rc2";
+    displayName = "NDK (Side by side) 20.0.5392854";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-beta2-darwin-x86_64.zip;
+        sha1 = "cd94191ace6b31ec9af1cc370173e16934e1cb8b";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-beta2-linux-x86_64.zip;
+        sha1 = "8285ae2e24a7232fd0cbfb55e955c8586ef2ee02";
+      };
+      
+    };
+  };
+  
+  "ndk"."20.0.5471264-rc3" = {
+    
+    name = "ndk";
+    path = "ndk/20.0.5471264";
+    revision = "20.0.5471264-rc3";
+    displayName = "NDK (Side by side) 20.0.5471264";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-beta3-darwin-x86_64.zip;
+        sha1 = "665a035cadb0dd03e6502ba25c18643f6e4ede24";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-beta3-linux-x86_64.zip;
+        sha1 = "674d8fb0e0df8e8be1c31fa321eb176548a19ba3";
+      };
+      
+    };
+  };
+  
+  "ndk"."20.0.5594570" = {
+    
+    name = "ndk";
+    path = "ndk/20.0.5594570";
+    revision = "20.0.5594570";
+    displayName = "NDK (Side by side) 20.0.5594570";
+    archives = {
+      macosx = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-darwin-x86_64.zip;
+        sha1 = "96d5f1c50452596912d1982439c514194b5751e6";
+      };
+      linux = fetchurl {
+        url = https://dl.google.com/android/repository/android-ndk-r20-linux-x86_64.zip;
+        sha1 = "8665fc84a1b1f0d6ab3b5fdd1e30200cc7b9adff";
+      };
+      
+    };
+  };
+  
   "patcher"."1" = {
     
     name = "patcher";
@@ -1155,27 +1540,27 @@
     archives = {
       
         all = fetchurl {
-          url = https://dl.google.com/android/repository/3534162-studio.sdk-patcher.zip.bak;
+          url = https://dl.google.com/android/repository/3534162-studio.sdk-patcher.zip;
           sha1 = "046699c5e2716ae11d77e0bad814f7f33fab261e";
         };
       
     };
   };
   
-  "platform-tools"."28.0.1" = {
+  "platform-tools"."29.0.4" = {
     
     name = "platform-tools";
     path = "platform-tools";
-    revision = "28.0.1";
+    revision = "29.0.4";
     displayName = "Android SDK Platform-Tools";
     archives = {
       macosx = fetchurl {
-        url = https://dl.google.com/android/repository/platform-tools_r28.0.1-darwin.zip;
-        sha1 = "ed1edad4a48c27655ce98d0a5821e7296e9de145";
+        url = https://dl.google.com/android/repository/platform-tools_r29.0.4-darwin.zip;
+        sha1 = "64a1e847c02ad404b3dbfd80487eefc97e6b3696";
       };
       linux = fetchurl {
-        url = https://dl.google.com/android/repository/platform-tools_r28.0.1-linux.zip;
-        sha1 = "74ff83bc203f01c4f04bd9316ab5a2573f023fd1";
+        url = https://dl.google.com/android/repository/platform-tools_r29.0.4-linux.zip;
+        sha1 = "a266af09893d9005d887e5f788ddb68f006ccd3e";
       };
       
     };
@@ -1499,6 +1884,22 @@
         all = fetchurl {
           url = https://dl.google.com/android/repository/platform-28_r06.zip;
           sha1 = "9a4e52b1d55bd2e24216b150aafae2503d3efba6";
+        };
+      
+    };
+  };
+  
+  "platforms"."29" = {
+    
+    name = "platforms";
+    path = "platforms/android-29";
+    revision = "29";
+    displayName = "Android SDK Platform 29";
+    archives = {
+      
+        all = fetchurl {
+          url = https://dl.google.com/android/repository/platform-29_r03.zip;
+          sha1 = "670e2e104333dae90e16ea3b615f0b63da5883ae";
         };
       
     };
@@ -1863,6 +2264,22 @@
         all = fetchurl {
           url = https://dl.google.com/android/repository/sources-28_r01.zip;
           sha1 = "5610e0c24235ee3fa343c899ddd551be30315255";
+        };
+      
+    };
+  };
+  
+  "sources"."29" = {
+    
+    name = "sources";
+    path = "sources/android-29";
+    revision = "29";
+    displayName = "Sources for Android 29";
+    archives = {
+      
+        all = fetchurl {
+          url = https://dl.google.com/android/repository/sources-29_r01.zip;
+          sha1 = "d0ad249e152b3a8fe3cb7c4a329453a048be29e4";
         };
       
     };
