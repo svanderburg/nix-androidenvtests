@@ -126,3 +126,23 @@ For example, the following instruction compiles the `hello-jni` app on a
 ```bash
 $ nix-build -A hello_jni_debug.host_x86_64-linux.build_16
 ```
+
+Testing against the upstream Nix packages set
+---------------------------------------------
+By default, the testcases are configured to test the `androidenv` implementation
+that resides in the root folder of this repository, which is basically used as
+an incubation version of the implementation that will eventually land in
+Nixpkgs.
+
+It is also possible to run the testcases directly against the `androidenv`
+implementation in the upstream Nixpkgs repository.
+
+To do this, you should add: `--arg useUpstream true` as an additional parameter
+to the command-line invocations described in the previous sections.
+
+For example, the following testcase builds a release APK of the example using
+the upstream `androidenv` implementation:
+
+```bash
+$ nix-build -A myfirstapp_release.host_x86_64-linux.build_16 --arg useUpstream true
+```
