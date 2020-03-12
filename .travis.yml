@@ -1,0 +1,32 @@
+language: nix
+jobs:
+  include:
+    - script:
+        - cd tests/deployment
+        - |
+          nix-build -A myfirstapp_debug.host_x86_64-linux.build_16 \
+          --arg useUpstream true
+    - script:
+        - cd tests/deployment
+        - |
+          nix-build -A myfirstapp_release.host_x86_64-linux.build_16 \
+          --arg useUpstream true
+    - script:
+        - cd tests/deployment
+        - |
+          nix-build -A emulate_myfirstapp_debug.host_x86_64-linux.build_16.emulate_16.armeabi-v7a \
+          --arg useUpstream true
+        - ./result/bin/run-test-emulator
+    - script:
+        - cd tests/deployment
+        - |
+          nix-build --arg buildPlatformVersions '[ "16" "17" ]' \
+          --arg emulatePlatformVersions '[ "16" "17" ]' \
+          --arg abiVersions '[ "armeabi-v7a" "x86" ]' \
+          -A emulate_myfirstapp_release.host_x86_64-linux.build_16.emulate_17.x86 \
+          --arg useUpstream true
+    - script:
+        - cd tests/deployment
+        - |
+          nix-build -A hello_jni_debug.host_x86_64-linux.build_16 \
+          --arg useUpstream true
