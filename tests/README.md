@@ -70,7 +70,9 @@ on a `x86_64-linux` host system, generates a script launching an emulator with a
 Android API-level 16 system-image that uses the `armeabi-v7a` ABI:
 
 ```bash
-$ nix-build -A emulate_myfirstapp_debug.host_x86_64-linux.build_16.emulate_16.armeabi-v7a
+$ nix-build --arg emulatePlatformVersions '[ "16" ]' \
+  --arg abiVersions '[ "armeabi-v7a" ]' \
+  -A emulate_myfirstapp_debug.host_x86_64-linux.build_16.emulate_16.armeabi-v7a
 $ ./result/bin/run-test-emulator
 ```
 
