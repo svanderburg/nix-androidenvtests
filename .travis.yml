@@ -14,7 +14,9 @@ jobs:
     - script:
         - cd tests/deployment
         - |
-          nix-build -A emulate_myfirstapp_debug.host_x86_64-linux.build_16.emulate_16.armeabi-v7a \
+          nix-build --arg emulatePlatformVersions '[ "16" ]' \
+          --arg abiVersions '[ "armeabi-v7a" ]' \
+          -A emulate_myfirstapp_debug.host_x86_64-linux.build_16.emulate_16.armeabi-v7a \
           --arg useUpstream true
         - ./result/bin/run-test-emulator
     - script:
