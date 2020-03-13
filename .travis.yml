@@ -1,25 +1,72 @@
-language: nix
+aliases:
+  - &nix_job_template
+    # From https://github.com/ankidroid/Anki-Android/blob/402d70b0d5fbd210b765766b354147dd2a98470c/.travis.yml#L2-L4
+    # -- 8< ----
+    language: bash
+    # ignored on non-linux platforms, but bionic is required for nested virtualization
+    dist: bionic
+    # ---- >8 --
+    before_install:
+      # Excerpts from https://github.com/travis-ci/travis-build/blob/c708e1c03407a38c64a6a42a59428b87d58c4515/lib/travis/build/script/nix.rb#L18-L69
+      # -- 8< ----
+      - export NIX_CURL_FLAGS='-sS'
+      - echo '-s' >> ~/.curlrc
+      - echo '-S' >> ~/.curlrc
+      - echo '--retry 3' >> ~/.curlrc
+      - wget --retry-connrefused --waitretry=1 -O /tmp/nix-install https://nixos.org/releases/nix/nix-2.3.3/install
+      - yes | sh /tmp/nix-install
+      # single-user install (linux)
+      - source ${TRAVIS_HOME}/.nix-profile/etc/profile.d/nix.sh
+      - nix-env --version
+      - nix-instantiate --eval -E 'with import <nixpkgs> {}; lib.version or lib.nixpkgsVersion'
+      # ---- >8 --
+      #
+      # From https://github.com/ankidroid/Anki-Android/blob/402d70b0d5fbd210b765766b354147dd2a98470c/.travis.yml#L104-L107
+      # -- 8< ----
+      # Set up KVM on linux for hardware acceleration. Manually here so it only happens for emulator tests, takes ~30s
+      - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder
+      - sudo adduser $USER libvirt
+      - sudo adduser $USER kvm
+      # ---- >8 --
+    # From https://github.com/ankidroid/Anki-Android/blob/402d70b0d5fbd210b765766b354147dd2a98470c/.travis.yml#L111-L117
+    # with changes to the emulator command being called and to the
+    # parameters passed.
+    # -- 8< ----
+  - result_bin_run_test_emulator: &result_bin_run_test_emulator |
+      AUDIO="-no-audio"
+      EMU_PARAMS="-verbose -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 2048"
+      # This double "sudo" monstrosity is used to have Travis execute the
+      # emulator with its new group permissions and help preserve the rule
+      # of least privilege.
+      sudo -E sudo -u $USER -E \
+        env NIX_ANDROID_EMULATOR_FLAGS="${AUDIO?} ${EMU_PARAMS?}" \
+        ./result/bin/run-test-emulator
+    # ---- >8 --
 jobs:
   include:
-    - script:
+    - << : *nix_job_template
+      script:
         - cd tests/deployment
         - |
           nix-build -A myfirstapp_debug.host_x86_64-linux.build_16 \
           --arg useUpstream true
-    - script:
+    - << : *nix_job_template
+      script:
         - cd tests/deployment
         - |
           nix-build -A myfirstapp_release.host_x86_64-linux.build_16 \
           --arg useUpstream true
-    - script:
+    - << : *nix_job_template
+      script:
         - cd tests/deployment
         - |
           nix-build --arg emulatePlatformVersions '[ "16" ]' \
           --arg abiVersions '[ "armeabi-v7a" ]' \
           -A emulate_myfirstapp_debug.host_x86_64-linux.build_16.emulate_16.armeabi-v7a \
           --arg useUpstream true
-        - ./result/bin/run-test-emulator
-    - script:
+        - *result_bin_run_test_emulator
+    - << : *nix_job_template
+      script:
         - cd tests/deployment
         - |
           nix-build --arg buildPlatformVersions '[ "16" "17" ]' \
@@ -27,7 +74,8 @@ jobs:
           --arg abiVersions '[ "armeabi-v7a" "x86" ]' \
           -A emulate_myfirstapp_release.host_x86_64-linux.build_16.emulate_17.x86 \
           --arg useUpstream true
-    - script:
+    - << : *nix_job_template
+      script:
         - cd tests/deployment
         - |
           nix-build -A hello_jni_debug.host_x86_64-linux.build_16 \
